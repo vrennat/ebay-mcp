@@ -1,98 +1,17 @@
-name: CI
-'on':
-  pull_request:
-    branches:
-      - main
+name: Read-only safety checks
+on:
   push:
-    branches:
-      - main
-    paths-ignore:
-      - '**/*.md'
-  workflow_dispatch: null
+  pull_request:
 permissions:
   contents: read
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 jobs:
-  changes:
-    name: Changes
-    runs-on: ubuntu-slim
-    timeout-minutes: 5
-    outputs:
-      since: ${{ steps.filter.outputs.everything != 'true' && github.event.pull_request.base.sha || '' }}
-      code: ${{ github.event_name != 'pull_request' || steps.filter.outputs.code == 'true' }}
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - uses: dorny/paths-filter@ceb8a2b8f2d89434be7ff52d3de7ec3738c5cc9d # v4.0.3
-        id: filter
-        if: github.event_name == 'pull_request'
-        with:
-          token: ''
-          filters: |
-            everything: &everything
-              - pnpm-lock.yaml
-              - package.json
-              - 'tsconfig*.json'
-              - 'mcp-apps/tsconfig.json'
-              - 'vitest*.cts'
-              - '.github/**'
-            code:
-              - *everything
-              - 'src/**'
-              - 'mcp-apps/**'
-              - 'tests/**'
-              - 'public/**'
-  verify:
-    name: Test and build
-    needs: changes
-    if: needs.changes.outputs.code == 'true'
+  test:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: actions/setup-node@v4
         with:
-          fetch-depth: 0
-      - name: Setup workspace
-        uses: ./.github/actions/setup
-      - name: Run integration tests
-        if: needs.changes.outputs.since == ''
-        run: pnpm test:integration
-      - name: Run unit tests with the coverage gate
-        if: needs.changes.outputs.since == ''
-        run: pnpm test:coverage
-      - name: Run integration tests for changed files
-        if: needs.changes.outputs.since != ''
-        env:
-          SINCE: ${{ needs.changes.outputs.since }}
-        run: pnpm exec vitest run --config vitest.integration.config.cts --changed "$SINCE"
-      - name: Run unit tests for changed files
-        if: needs.changes.outputs.since != ''
-        env:
-          SINCE: ${{ needs.changes.outputs.since }}
-        run: pnpm exec vitest run --changed "$SINCE"
-      - name: Build
-        run: pnpm build
-  gate:
-    name: CI Gate
-    runs-on: ubuntu-slim
-    timeout-minutes: 5
-    needs:
-      - changes
-      - verify
-    if: always()
-    steps:
-      - name: Require every check to pass
-        if: contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled')
-        run: exit 1
-  report-failure:
-    name: Open issue on main failure
-    needs:
-      - changes
-      - verify
-    if: failure() && github.event_name == 'push' && github.ref == 'refs/heads/main'
-    permissions:
-      contents: read
-      issues: write
-      actions: read
-    uses: ./.github/workflows/report-failure.yml
+          node-version: '24'
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npm run verify

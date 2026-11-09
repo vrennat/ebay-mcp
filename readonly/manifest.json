@@ -1,0 +1,89 @@
+{
+  "$schema": "https://raw.githubusercontent.com/modelcontextprotocol/mcpb/main/schemas/mcpb-manifest-v0.3.schema.json",
+  "manifest_version": "0.3",
+  "name": "ac-ebay-readonly",
+  "display_name": "AC eBay Read-Only",
+  "version": "0.1.0",
+  "description": "Read your eBay listings and account data through an explicitly restricted, local MCP server.",
+  "long_description": "Unofficial local read-only eBay connector. Requires your existing eBay developer application and OAuth access token. No listing edits, purchases, messages, or account changes are exposed. Token scopes and eBay API access still limit coverage. Tokens expire; replace them in extension settings. This extension does not create credentials or automatically refresh tokens.",
+  "author": {
+    "name": "AC eBay Read-Only contributors"
+  },
+  "license": "MIT",
+  "server": {
+    "type": "node",
+    "entry_point": "index.mjs",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/index.mjs"],
+      "env": {
+        "AC_EBAY_CONFIG_SOURCE": "desktop-extension",
+        "AC_EBAY_ENVIRONMENT": "${user_config.environment}",
+        "AC_EBAY_USER_ACCESS_TOKEN": "${user_config.user_access_token}",
+        "AC_EBAY_APP_ACCESS_TOKEN": "${user_config.app_access_token}",
+        "AC_EBAY_MARKETPLACE_ID": "EBAY_US",
+        "AC_EBAY_CONTENT_LANGUAGE": "en-US"
+      }
+    }
+  },
+  "tools": [
+    {
+      "name": "ac_status",
+      "description": "Check configured access and coverage limits without revealing credentials."
+    },
+    {
+      "name": "ac_find_reads",
+      "description": "Find allowed read operations."
+    },
+    {
+      "name": "ac_describe_read",
+      "description": "Inspect one allowed operation and its inputs."
+    },
+    {
+      "name": "ac_read",
+      "description": "Run a catalogued GET read."
+    },
+    {
+      "name": "ac_active_listings",
+      "description": "Read active listings, including website-created listings."
+    },
+    {
+      "name": "ac_listing",
+      "description": "Read a listing by item ID."
+    },
+    {
+      "name": "ac_bulk_inventory",
+      "description": "Read up to 25 inventory records."
+    }
+  ],
+  "compatibility": {
+    "platforms": ["darwin", "win32"],
+    "runtimes": {
+      "node": ">=24"
+    }
+  },
+  "user_config": {
+    "user_access_token": {
+      "type": "string",
+      "title": "eBay user access token",
+      "description": "Paste an existing OAuth user access token from your eBay developer application. Use only the read scopes documented with this connector. Never paste it in a chat.",
+      "sensitive": true,
+      "required": true
+    },
+    "app_access_token": {
+      "type": "string",
+      "title": "Application access token (optional)",
+      "description": "Optional existing eBay application access token for public lookups. Leave blank if you do not have one.",
+      "sensitive": true,
+      "required": false,
+      "default": ""
+    },
+    "environment": {
+      "type": "string",
+      "title": "eBay environment",
+      "description": "Enter production for your real eBay account, or sandbox for an eBay test account. No other value is accepted.",
+      "required": true,
+      "default": "production"
+    }
+  }
+}

@@ -1,0 +1,3243 @@
+[
+  {
+    "id": "inventory.getInventoryItem",
+    "family": "inventory",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/inventory/v1/inventory_item/{sku}",
+    "pathParameters": [
+      "sku"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.inventory.readonly",
+    "token": "user",
+    "description": "This call retrieves the inventory item record for a given SKU. The SKU value is passed in at the end of the call URI. There is no request payload for this call. The authorization header is the only required HTTP header for this call, and it is required for all Inventory API calls. See the HTTP request headers section for more information. For those who prefer to retrieve numerous inventory item records by SKU value with one call (up to 25 at a time), the bulkGetInventoryItem method can be used. To retrieve all inventory item records defined on the seller's account, the getInventoryItems method can be used (with pagination control if desired).",
+    "source": "src/types/sell-apps/listing-management/sellInventoryV1Oas3.ts"
+  },
+  {
+    "id": "inventory.getInventoryItems",
+    "family": "inventory",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/inventory/v1/inventory_item",
+    "pathParameters": [],
+    "queryParameters": [
+      "limit",
+      "offset"
+    ],
+    "requiredQuery": [],
+    "scope": "sell.inventory.readonly",
+    "token": "user",
+    "description": "This call retrieves all inventory item records defined for the seller's account. The limit query parameter allows the seller to control how many records are returned per page, and the offset query parameter is used to retrieve a specific page of records. The seller can make multiple calls to scan through multiple pages of records. There is no request payload for this call. The authorization header is the only required HTTP header for this call, and it is required for all Inventory API calls. See the HTTP request headers section for more information. For those who prefer to retrieve numerous inventory item records by SKU value with one call (up to 25 at a time), the bulkGetInventoryItem method can be used.",
+    "source": "src/types/sell-apps/listing-management/sellInventoryV1Oas3.ts"
+  },
+  {
+    "id": "inventory.getProductCompatibility",
+    "family": "inventory",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/inventory/v1/inventory_item/{sku}/product_compatibility",
+    "pathParameters": [
+      "sku"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.inventory.readonly",
+    "token": "user",
+    "description": "This call is used by the seller to retrieve the list of products that are compatible with the inventory item. The SKU value for the inventory item is passed into the call URI, and a successful call with return the compatible vehicle list associated with this inventory item. Product compatibility is currently only applicable to motor vehicle parts and accessory categories, but more categories may be supported in the future.",
+    "source": "src/types/sell-apps/listing-management/sellInventoryV1Oas3.ts"
+  },
+  {
+    "id": "inventory.getInventoryItemGroup",
+    "family": "inventory",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/inventory/v1/inventory_item_group/{inventoryItemGroupKey}",
+    "pathParameters": [
+      "inventoryItemGroupKey"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.inventory.readonly",
+    "token": "user",
+    "description": "This call retrieves the inventory item group for a given inventoryItemGroupKey value. The inventoryItemGroupKey value is passed in at the end of the call URI.",
+    "source": "src/types/sell-apps/listing-management/sellInventoryV1Oas3.ts"
+  },
+  {
+    "id": "inventory.getSkuLocationMapping",
+    "family": "inventory",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/inventory/v1/listing/{listingId}/sku/{sku}/locations",
+    "pathParameters": [
+      "listingId",
+      "sku"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.inventory.readonly",
+    "token": "user",
+    "description": "This method allows sellers to retrieve the locations mapped to a specific SKU within a listing. The listingId and sku of the listing are passed in as path parameters. This method only retrieves location mappings for a single SKU value; if a seller wishes to retrieve the location mappings for all items in a multiple-variation listing, this method must be called for each variation in the listing. If there are fulfillment center locations mapped to the SKU, they will be returned in the locations array. If no locations are mapped to the SKU, status code 404 Not Found will be returned.",
+    "source": "src/types/sell-apps/listing-management/sellInventoryV1Oas3.ts"
+  },
+  {
+    "id": "inventory.getOffers",
+    "family": "inventory",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/inventory/v1/offer",
+    "pathParameters": [],
+    "queryParameters": [
+      "format",
+      "limit",
+      "marketplace_id",
+      "offset",
+      "sku"
+    ],
+    "requiredQuery": [],
+    "scope": "sell.inventory.readonly",
+    "token": "user",
+    "description": "This call retrieves all existing offers for the specified SKU value. The seller has the option of limiting the offers that are retrieved to a specific eBay marketplace, or to a listing format. Note: At this time, the same SKU value can not be offered across multiple eBay marketplaces, so the marketplace_id query parameter currently does not have any practical use for this call. Note: The same SKU can be offered through an auction and a fixed-price listing concurrently. If this is the case, getOffers will return two offers. Otherwise, only one offer will be returned. The authorization header is the only required HTTP header for this call. See the HTTP request headers section for more information.",
+    "source": "src/types/sell-apps/listing-management/sellInventoryV1Oas3.ts"
+  },
+  {
+    "id": "inventory.getOffer",
+    "family": "inventory",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/inventory/v1/offer/{offerId}",
+    "pathParameters": [
+      "offerId"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.inventory.readonly",
+    "token": "user",
+    "description": "This call retrieves a specific published or unpublished offer. The unique identifier of the offer ( offerId ) is passed in at the end of the call URI. The authorization header is the only required HTTP header for this call. See the HTTP request headers section for more information.",
+    "source": "src/types/sell-apps/listing-management/sellInventoryV1Oas3.ts"
+  },
+  {
+    "id": "inventory.getInventoryLocation",
+    "family": "inventory",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/inventory/v1/location/{merchantLocationKey}",
+    "pathParameters": [
+      "merchantLocationKey"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.inventory.readonly",
+    "token": "user",
+    "description": "This call retrieves all defined details of the inventory location that is specified by the merchantLocationKey path parameter. A successful call will return an HTTP status value of 200 OK .",
+    "source": "src/types/sell-apps/listing-management/sellInventoryV1Oas3.ts"
+  },
+  {
+    "id": "inventory.getInventoryLocations",
+    "family": "inventory",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/inventory/v1/location",
+    "pathParameters": [],
+    "queryParameters": [
+      "limit",
+      "offset"
+    ],
+    "requiredQuery": [],
+    "scope": "sell.inventory.readonly",
+    "token": "user",
+    "description": "This call retrieves all defined details for every inventory location associated with the seller's account. There are no required parameters for this call and no request payload. However, there are two optional query parameters, limit and offset . The limit query parameter sets the maximum number of locations returned on one page of data, and the offset query parameter specifies the page of data to return. These query parameters are discussed more in the URI parameters table below. The authorization HTTP header is the only required request header for this call. A successful call will return an HTTP status value of 200 OK .",
+    "source": "src/types/sell-apps/listing-management/sellInventoryV1Oas3.ts"
+  },
+  {
+    "id": "media.getImage",
+    "family": "media",
+    "method": "GET",
+    "host": "apim",
+    "path": "/commerce/media/v1_beta/image/{image_id}",
+    "pathParameters": [
+      "image_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.inventory",
+    "token": "user",
+    "description": "This method retrieves an EPS image URL and its expiration details for the unique identifier specified in the path parameter image_id . Use the retrieved EPS image URL to add the image to a listing through the Inventory API or the Trading API . See Managing images for additional details. Note: If a user inputs a valid image_id as a path parameter but the EPS image associated with that ID has expired, the call will fail and a 404 Not Found status code will be returned.",
+    "source": "src/types/sell-apps/listing-management/commerceMediaV1BetaOas3.ts"
+  },
+  {
+    "id": "media.getVideo",
+    "family": "media",
+    "method": "GET",
+    "host": "apim",
+    "path": "/commerce/media/v1_beta/video/{video_id}",
+    "pathParameters": [
+      "video_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.inventory",
+    "token": "user",
+    "description": "This method retrieves a video's metadata and content given a specified video ID . The method returns the title , size , classification , description , video ID , playList , status , status message (if any), expiration date , and thumbnail image of the retrieved video. The video's title , size , classification , and description are set using the createVideo method. The video's playList contains two URLs that link to instances of the streaming video based on the supported protocol. The status field contains the current status of the video. After a video upload is successfully completed, the video's status will show as PROCESSING until the video reaches one of the terminal states of LIVE , BLOCKED or PROCESSING_FAILED . If a video's processing fails, it could be because the file is corrupted, is too large, or its size doesn't match what was provided in the metadata. Refer to the error messages to determine the cause of the video's failure ",
+    "source": "src/types/sell-apps/listing-management/commerceMediaV1BetaOas3.ts"
+  },
+  {
+    "id": "media.getDocument",
+    "family": "media",
+    "method": "GET",
+    "host": "api",
+    "path": "/commerce/media/v1_beta/document/{document_id}",
+    "pathParameters": [
+      "document_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.inventory",
+    "token": "user",
+    "description": "This method retrieves the current status and metadata of the specified document. Important! The document ID value returned in the response payload of the createDocument method is a required input path parameter for this method. See Managing documents for additional information.",
+    "source": "src/types/sell-apps/listing-management/commerceMediaV1BetaOas3.ts"
+  },
+  {
+    "id": "media.downloadPostOrderDocument",
+    "family": "media",
+    "method": "GET",
+    "host": "apiz",
+    "path": "/commerce/media/v1_beta/post_order/document/{document_id}",
+    "pathParameters": [
+      "document_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "commerce.post_order.document",
+    "token": "user",
+    "description": "This method downloads the file associated with the specified document ID. Access depends on the document’s state: SUBMITTED: Only the document owner can download it PUBLISHED: The document is no longer restricted to the owner and can be downloaded by authorized parties involved in the specific post‑order flow based on the documentUsageType Note: After a document is uploaded (but not yet published), its status is SUBMITTED . Once its identifier is linked to a post‑order entity through an eBay GraphQL mutation, the status changes to PUBLISHED . A post-order entity is part of eBay's order management for activities after purchase (such as returns). Important! The document must be in the SUBMITTED or PUBLISHED state to be downloadable. All documents (published or submitted) expire and become inaccessible after their expiration date.",
+    "source": "src/types/sell-apps/listing-management/commerceMediaV1BetaOas3.ts"
+  },
+  {
+    "id": "stores.getStoreCategories",
+    "family": "stores",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/stores/v1/store/categories",
+    "pathParameters": [],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.stores",
+    "token": "user",
+    "description": "This method is used to retrieve the category hierarchy for an eBay user's store. Note: Three levels of store categories are supported.",
+    "source": "src/types/sell-apps/listing-management/sellStoresV1Oas3.ts"
+  },
+  {
+    "id": "stores.getStore",
+    "family": "stores",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/stores/v1/store",
+    "pathParameters": [],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.stores",
+    "token": "user",
+    "description": "This method is used to retrieve information for an eBay user's store such as store name, store URL, and description.",
+    "source": "src/types/sell-apps/listing-management/sellStoresV1Oas3.ts"
+  },
+  {
+    "id": "stores.getStoreTask",
+    "family": "stores",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/stores/v1/store/tasks/{task_id}",
+    "pathParameters": [
+      "task_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.stores",
+    "token": "user",
+    "description": "This method retrieves the current status of a recent store operation. The unique identifier of the task is passed in as a path parameter.",
+    "source": "src/types/sell-apps/listing-management/sellStoresV1Oas3.ts"
+  },
+  {
+    "id": "stores.getStoreTasks",
+    "family": "stores",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/stores/v1/store/tasks",
+    "pathParameters": [],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.stores",
+    "token": "user",
+    "description": "This method retrieves the status of all async store tasks for a store. Every task is set as FAILED or COMPLETED once it's execution time reaches 24 hours.",
+    "source": "src/types/sell-apps/listing-management/sellStoresV1Oas3.ts"
+  },
+  {
+    "id": "feed.getOrderTasks",
+    "family": "feed",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/feed/v1/order_task",
+    "pathParameters": [],
+    "queryParameters": [
+      "date_range",
+      "feed_type",
+      "limit",
+      "look_back_days",
+      "offset",
+      "schedule_id"
+    ],
+    "requiredQuery": [],
+    "scope": "sell.inventory",
+    "token": "user",
+    "description": "This method returns the details and status for an array of order tasks based on a specified feed_type or schedule_id . Specifying both feed_type and schedule_id results in an error. Since schedules are based on feed types, you can specify a schedule ( schedule_id ) that returns the needed feed_type . If specifying the feed_type , limit which order tasks are returned by specifying filters such as the creation date range or period of time using look_back_days . If specifying a schedule_id , the schedule template (that the schedule_id is based on) determines which order tasks are returned (see schedule_id for additional information). Each schedule_id applies to one feed_type .",
+    "source": "src/types/sell-apps/listing-management/sellFeedV1Oas3.ts"
+  },
+  {
+    "id": "feed.getOrderTask",
+    "family": "feed",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/feed/v1/order_task/{task_id}",
+    "pathParameters": [
+      "task_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.inventory",
+    "token": "user",
+    "description": "This method retrieves the task details and status of the specified task. The input is task_id . For details about how this method is used, see Working with Order Feeds in the Selling Integration Guide.",
+    "source": "src/types/sell-apps/listing-management/sellFeedV1Oas3.ts"
+  },
+  {
+    "id": "feed.getInventoryTasks",
+    "family": "feed",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/feed/v1/inventory_task",
+    "pathParameters": [],
+    "queryParameters": [
+      "feed_type",
+      "schedule_id",
+      "look_back_days",
+      "date_range",
+      "limit",
+      "offset"
+    ],
+    "requiredQuery": [],
+    "scope": "sell.inventory",
+    "token": "user",
+    "description": "This method searches for multiple tasks of a specific feed type, and includes date filters and pagination.",
+    "source": "src/types/sell-apps/listing-management/sellFeedV1Oas3.ts"
+  },
+  {
+    "id": "feed.getInventoryTask",
+    "family": "feed",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/feed/v1/inventory_task/{task_id}",
+    "pathParameters": [
+      "task_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.inventory",
+    "token": "user",
+    "description": "This method retrieves the task details and status of the specified inventory-related task. The input is task_id .",
+    "source": "src/types/sell-apps/listing-management/sellFeedV1Oas3.ts"
+  },
+  {
+    "id": "feed.getSchedules",
+    "family": "feed",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/feed/v1/schedule",
+    "pathParameters": [],
+    "queryParameters": [
+      "feed_type",
+      "limit",
+      "offset"
+    ],
+    "requiredQuery": [
+      "feed_type"
+    ],
+    "scope": "sell.inventory",
+    "token": "user",
+    "description": "This method retrieves an array containing the details and status of all schedules based on the specified feed_type . Use this method to find a schedule if you do not know the schedule_id .",
+    "source": "src/types/sell-apps/listing-management/sellFeedV1Oas3.ts"
+  },
+  {
+    "id": "feed.getSchedule",
+    "family": "feed",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/feed/v1/schedule/{schedule_id}",
+    "pathParameters": [
+      "schedule_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.inventory",
+    "token": "user",
+    "description": "This method retrieves schedule details and status of the specified schedule. Specify the schedule to retrieve using the schedule_id . Use the getSchedules method to find a schedule if you do not know the schedule_id .",
+    "source": "src/types/sell-apps/listing-management/sellFeedV1Oas3.ts"
+  },
+  {
+    "id": "feed.getLatestResultFile",
+    "family": "feed",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/feed/v1/schedule/{schedule_id}/download_result_file",
+    "pathParameters": [
+      "schedule_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.inventory",
+    "token": "user",
+    "description": "This method downloads the latest Order Report generated by the schedule. The response of this call is a compressed or uncompressed CSV, XML, or JSON file, with the applicable file extension (for example: csv.gz). Specify the schedule_id path parameter to download its last generated file.",
+    "source": "src/types/sell-apps/listing-management/sellFeedV1Oas3.ts"
+  },
+  {
+    "id": "feed.getScheduleTemplate",
+    "family": "feed",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/feed/v1/schedule_template/{schedule_template_id}",
+    "pathParameters": [
+      "schedule_template_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.inventory",
+    "token": "user",
+    "description": "This method retrieves the details of the specified template. Specify the template to retrieve using the schedule_template_id path parameter. Use the getScheduleTemplates method to find a schedule template if you do not know the schedule_template_id .",
+    "source": "src/types/sell-apps/listing-management/sellFeedV1Oas3.ts"
+  },
+  {
+    "id": "feed.getScheduleTemplates",
+    "family": "feed",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/feed/v1/schedule_template",
+    "pathParameters": [],
+    "queryParameters": [
+      "feed_type",
+      "limit",
+      "offset"
+    ],
+    "requiredQuery": [
+      "feed_type"
+    ],
+    "scope": "sell.inventory",
+    "token": "user",
+    "description": "This method retrieves an array containing the details and status of all schedule templates based on the specified feed_type . Use this method to find a schedule template if you do not know the schedule_template_id .",
+    "source": "src/types/sell-apps/listing-management/sellFeedV1Oas3.ts"
+  },
+  {
+    "id": "feed.getTasks",
+    "family": "feed",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/feed/v1/task",
+    "pathParameters": [],
+    "queryParameters": [
+      "date_range",
+      "feed_type",
+      "limit",
+      "look_back_days",
+      "offset",
+      "schedule_id"
+    ],
+    "requiredQuery": [],
+    "scope": "sell.inventory",
+    "token": "user",
+    "description": "This method returns the details and status for an array of tasks based on a specified feed_type or schedule_id . Specifying both feed_type and schedule_id results in an error. Since schedules are based on feed types, you can specify a schedule ( schedule_id ) that returns the needed feed_type . If specifying the feed_type , limit which tasks are returned by specifying filters, such as the creation date range or period of time using look_back_days . Also, by specifying the feed_type , both on-demand and scheduled reports are returned. If specifying a schedule_id , the schedule template (that the schedule ID is based on) determines which tasks are returned (see schedule_id for additional information). Each scheduledId applies to one feed_type .",
+    "source": "src/types/sell-apps/listing-management/sellFeedV1Oas3.ts"
+  },
+  {
+    "id": "feed.getInputFile",
+    "family": "feed",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/feed/v1/task/{task_id}/download_input_file",
+    "pathParameters": [
+      "task_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.inventory",
+    "token": "user",
+    "description": "This method downloads the file previously uploaded using uploadFile . Specify the task_id from the uploadFile call. Note: With respect to LMS, this method applies to all feed types except LMS_ORDER_REPORT and LMS_ACTIVE_INVENTORY_REPORT . See LMS API Feeds in the Selling Integration Guide.",
+    "source": "src/types/sell-apps/listing-management/sellFeedV1Oas3.ts"
+  },
+  {
+    "id": "feed.getResultFile",
+    "family": "feed",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/feed/v1/task/{task_id}/download_result_file",
+    "pathParameters": [
+      "task_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.inventory",
+    "token": "user",
+    "description": "This method retrieves the generated file that is associated with the specified task ID. The response of this call is a compressed or uncompressed CSV, XML, or JSON file, with the applicable file extension (for example: csv.gz). For details about how this method is used, see Working with Order Feeds in the Selling Integration Guide. Note: The status of the task to retrieve must be in the COMPLETED or COMPLETED_WITH_ERROR state before this method can retrieve the file. You can use the getTask or getTasks method to retrieve the status of the task.",
+    "source": "src/types/sell-apps/listing-management/sellFeedV1Oas3.ts"
+  },
+  {
+    "id": "feed.getTask",
+    "family": "feed",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/feed/v1/task/{task_id}",
+    "pathParameters": [
+      "task_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.inventory",
+    "token": "user",
+    "description": "This method retrieves the details and status of the specified task. The input is task_id . For details of how this method is used, see Working with Order Feeds in the Selling Integration Guide.",
+    "source": "src/types/sell-apps/listing-management/sellFeedV1Oas3.ts"
+  },
+  {
+    "id": "feed.getCustomerServiceMetricTasks",
+    "family": "feed",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/feed/v1/customer_service_metric_task",
+    "pathParameters": [],
+    "queryParameters": [
+      "date_range",
+      "feed_type",
+      "limit",
+      "look_back_days",
+      "offset"
+    ],
+    "requiredQuery": [],
+    "scope": "sell.inventory",
+    "token": "user",
+    "description": "Use this method to return an array of customer service metric tasks. You can limit the tasks returned by specifying a date range. Note: You can pass in either the look_back_days or date_range , but not both.",
+    "source": "src/types/sell-apps/listing-management/sellFeedV1Oas3.ts"
+  },
+  {
+    "id": "feed.getCustomerServiceMetricTask",
+    "family": "feed",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/feed/v1/customer_service_metric_task/{task_id}",
+    "pathParameters": [
+      "task_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.inventory",
+    "token": "user",
+    "description": "Use this method to retrieve customer service metric task details for the specified task. The input is task_id .",
+    "source": "src/types/sell-apps/listing-management/sellFeedV1Oas3.ts"
+  },
+  {
+    "id": "fulfillment.getOrder",
+    "family": "fulfillment",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/fulfillment/v1/order/{orderId}",
+    "pathParameters": [
+      "orderId"
+    ],
+    "queryParameters": [
+      "fieldGroups"
+    ],
+    "requiredQuery": [],
+    "scope": "sell.fulfillment.readonly",
+    "token": "user",
+    "description": "Use this call to retrieve the contents of an order based on its unique identifier, orderId . This value was returned in the getOrders call's orders.orderId field when you searched for orders by creation date, modification date, or fulfillment status. Include the optional fieldGroups query parameter set to TAX_BREAKDOWN to return a breakdown of the taxes and fees. The returned Order object contains information you can use to create and process fulfillments, including: Information about the buyer and seller Information about the order's line items The plans for packaging, addressing and shipping the order The status of payment, packaging, addressing, and shipping the order A summary of monetary amounts specific to the order such as pricing, payments, and shipping costs A summary of applied taxes and fees, and optionally a breakdown of each",
+    "source": "src/types/sell-apps/order-management/sellFulfillmentV1Oas3.ts"
+  },
+  {
+    "id": "fulfillment.getOrders",
+    "family": "fulfillment",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/fulfillment/v1/order",
+    "pathParameters": [],
+    "queryParameters": [
+      "fieldGroups",
+      "filter",
+      "limit",
+      "offset",
+      "orderIds"
+    ],
+    "requiredQuery": [],
+    "scope": "sell.fulfillment.readonly",
+    "token": "user",
+    "description": "Use this method to search for and retrieve one or more orders based on their creation date, last modification date, or fulfillment status using the filter parameter. You can alternatively specify a list of orders using the orderIds parameter. Include the optional fieldGroups query parameter set to TAX_BREAKDOWN to return a breakdown of the taxes and fees. By default, when no filters are used this call returns all orders created within the last 90 days. The returned Order objects contain information you can use to create and process fulfillments, including: Information about the buyer and seller Information about the order's line items The plans for packaging, addressing and shipping the order The status of payment, packaging, addressing, and shipping the order A summary of monetary amounts specific to the order such as pricing, payments, and shipping costs A summary of applied taxes and fees, and optionally a breakdown of each Important",
+    "source": "src/types/sell-apps/order-management/sellFulfillmentV1Oas3.ts"
+  },
+  {
+    "id": "fulfillment.getShippingFulfillments",
+    "family": "fulfillment",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/fulfillment/v1/order/{orderId}/shipping_fulfillment",
+    "pathParameters": [
+      "orderId"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.fulfillment.readonly",
+    "token": "user",
+    "description": "Use this call to retrieve the contents of all fulfillments currently defined for a specified order based on the order's unique identifier, orderId . This value is returned in the getOrders call's members.orderId field when you search for orders by creation date or shipment status.",
+    "source": "src/types/sell-apps/order-management/sellFulfillmentV1Oas3.ts"
+  },
+  {
+    "id": "fulfillment.getShippingFulfillment",
+    "family": "fulfillment",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/fulfillment/v1/order/{orderId}/shipping_fulfillment/{fulfillmentId}",
+    "pathParameters": [
+      "orderId",
+      "fulfillmentId"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.fulfillment.readonly",
+    "token": "user",
+    "description": "Use this call to retrieve the contents of a fulfillment based on its unique identifier, fulfillmentId (combined with the associated order's orderId ). The fulfillmentId value was originally generated by the createShippingFulfillment call, and is returned by the getShippingFulfillments call in the members.fulfillmentId field.",
+    "source": "src/types/sell-apps/order-management/sellFulfillmentV1Oas3.ts"
+  },
+  {
+    "id": "fulfillment.getPaymentDispute",
+    "family": "fulfillment",
+    "method": "GET",
+    "host": "apiz",
+    "path": "/sell/fulfillment/v1/payment_dispute/{payment_dispute_id}",
+    "pathParameters": [
+      "payment_dispute_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.payment.dispute",
+    "token": "user",
+    "description": "parameters: { query?: never; header?: never; path?: never; cookie?: never; }; /** * Get Payment Dispute Details * @description This method retrieves detailed information on a specific payment dispute. The payment dispute identifier is passed in as path parameter at the end of the call URI. Below is a summary of the information that is retrieved: Current status of payment dispute Amount of the payment dispute Reason the payment dispute was opened Order and line items associated with the payment dispute Seller response options if an action is currently required on the payment dispute Details on the results of the payment dispute if it has been closed Details on any evidence that was provided by the seller to fight the payment dispute",
+    "source": "src/types/sell-apps/order-management/sellFulfillmentV1Oas3.ts"
+  },
+  {
+    "id": "fulfillment.fetchEvidenceContent",
+    "family": "fulfillment",
+    "method": "GET",
+    "host": "apiz",
+    "path": "/sell/fulfillment/v1/payment_dispute/{payment_dispute_id}/fetch_evidence_content",
+    "pathParameters": [
+      "payment_dispute_id"
+    ],
+    "queryParameters": [
+      "evidence_id",
+      "file_id"
+    ],
+    "requiredQuery": [
+      "evidence_id",
+      "file_id"
+    ],
+    "scope": "sell.payment.dispute",
+    "token": "user",
+    "description": "parameters: { query?: never; header?: never; path?: never; cookie?: never; }; /** * Get Payment Dispute Evidence File * @description This call retrieves a specific evidence file for a payment dispute. The following three identifying parameters are needed in the call URI: payment_dispute_id : the identifier of the payment dispute. The identifier of each payment dispute is returned in the getPaymentDisputeSummaries response. evidence_id : the identifier of the evidential file set. The identifier of an evidential file set for a payment dispute is returned under the evidence array in the getPaymentDispute response. file_id : the identifier of an evidential file. This file must belong to the evidential file set identified through the evidence_id query parameter. The identifier of each evidential file is returned under the evidence.files array in the getPaymentDispute response. An actual binary file is returned if the call is successful. An e",
+    "source": "src/types/sell-apps/order-management/sellFulfillmentV1Oas3.ts"
+  },
+  {
+    "id": "fulfillment.getActivities",
+    "family": "fulfillment",
+    "method": "GET",
+    "host": "apiz",
+    "path": "/sell/fulfillment/v1/payment_dispute/{payment_dispute_id}/activity",
+    "pathParameters": [
+      "payment_dispute_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.payment.dispute",
+    "token": "user",
+    "description": "parameters: { query?: never; header?: never; path?: never; cookie?: never; }; /** * Get Payment Dispute Activity * @description This method retrieve a log of activity for a payment dispute. The identifier of the payment dispute is passed in as a path parameter. The output includes a timestamp for each action of the payment dispute, from creation to resolution, and all steps in between.",
+    "source": "src/types/sell-apps/order-management/sellFulfillmentV1Oas3.ts"
+  },
+  {
+    "id": "fulfillment.getPaymentDisputeSummaries",
+    "family": "fulfillment",
+    "method": "GET",
+    "host": "apiz",
+    "path": "/sell/fulfillment/v1/payment_dispute_summary",
+    "pathParameters": [],
+    "queryParameters": [
+      "order_id",
+      "buyer_username",
+      "open_date_from",
+      "open_date_to",
+      "payment_dispute_status",
+      "limit",
+      "offset"
+    ],
+    "requiredQuery": [],
+    "scope": "sell.payment.dispute",
+    "token": "user",
+    "description": "parameters: { query?: never; header?: never; path?: never; cookie?: never; }; /** * Search Payment Dispute by Filters * @description This method is used retrieve one or more payment disputes filed against the seller. These payment disputes can be open or recently closed. The following filter types are available in the request payload to control the payment disputes that are returned: Dispute filed against a specific order ( order_id parameter is used) Dispute(s) filed by a specific buyer ( buyer_username parameter is used) Dispute(s) filed within a specific date range ( open_date_from and/or open_date_to parameters are used) Disputes in a specific state ( payment_dispute_status parameter is used) More than one of these filter types can be used together. See the request payload request fields for more information about how each filter is used. If none of the filters are used, all open and recently closed payment disputes are returned. Pa",
+    "source": "src/types/sell-apps/order-management/sellFulfillmentV1Oas3.ts"
+  },
+  {
+    "id": "logistics.downloadLabelFile",
+    "family": "logistics",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/logistics/v1_beta/shipment/{shipmentId}/download_label_file",
+    "pathParameters": [
+      "shipmentId"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.logistics",
+    "token": "user",
+    "description": "This method returns the shipping label file that was generated for the shipmentId value specified in the request. Call createFromShippingQuote to generate a shipment ID. Note: The Logistics API only supports USPS shipping rates and labels. Use the Accept HTTP header to specify the format of the returned file. The default file format is a PDF file.",
+    "source": "src/types/sell-apps/order-management/sellLogisticsV1Oas3.ts"
+  },
+  {
+    "id": "logistics.getShipment",
+    "family": "logistics",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/logistics/v1_beta/shipment/{shipmentId}",
+    "pathParameters": [
+      "shipmentId"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.logistics",
+    "token": "user",
+    "description": "This method retrieves the shipment details for the specified shipment ID. Call createFromShippingQuote to generate a shipment ID.",
+    "source": "src/types/sell-apps/order-management/sellLogisticsV1Oas3.ts"
+  },
+  {
+    "id": "logistics.getShippingQuote",
+    "family": "logistics",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/logistics/v1_beta/shipping_quote/{shippingQuoteId}",
+    "pathParameters": [
+      "shippingQuoteId"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.logistics",
+    "token": "user",
+    "description": "This method retrieves the complete details of the shipping quote associated with the specified shippingQuoteId value. A \"shipping quote\" pertains to a single specific package and contains a set of shipping \"rates\" that quote the cost to ship the package by different shipping carriers and services. The quotes are based on the package's origin, destination, and size. Call createShippingQuote to create a shippingQuoteId .",
+    "source": "src/types/sell-apps/order-management/sellLogisticsV1Oas3.ts"
+  },
+  {
+    "id": "analytics.getCustomerServiceMetric",
+    "family": "analytics",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/analytics/v1/customer_service_metric/{customer_service_metric_type}/{evaluation_type}",
+    "pathParameters": [
+      "customer_service_metric_type",
+      "evaluation_type"
+    ],
+    "queryParameters": [
+      "evaluation_marketplace_id"
+    ],
+    "requiredQuery": [
+      "evaluation_marketplace_id"
+    ],
+    "scope": "sell.analytics.readonly",
+    "token": "user",
+    "description": "Use this method to retrieve a seller's performance and rating for the customer service metric. Control the response from the getCustomerServiceMetric method using the following path and query parameters: customer_service_metric_type controls the type of customer service transactions evaluated for the metric rating. evaluation_type controls the period you want to review. evaluation_marketplace_id specifies the target marketplace for the evaluation. Currently, metric data is returned for only peer benchmarking. For details on the workings of peer benchmarking, see Service metrics policy . For details on using and understanding the response from this method, see Interpreting customer service metric ratings .",
+    "source": "src/types/sell-apps/analytics-and-report/sellAnalyticsV1Oas3.ts"
+  },
+  {
+    "id": "analytics.findSellerStandardsProfiles",
+    "family": "analytics",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/analytics/v1/seller_standards_profile",
+    "pathParameters": [],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.analytics.readonly",
+    "token": "user",
+    "description": "This call retrieves all the standards profiles for the associated seller. A standards profile is a set of eBay seller metrics and the seller's associated compliance values (either TOP_RATED , ABOVE_STANDARD , or BELOW_STANDARD ). A seller's multiple profiles are distinguished by two criteria, a \"program\" and a \"cycle.\" A profile's program is one of three regions where the seller may have done business, or PROGRAM_GLOBAL to indicate all marketplaces where the seller has done business. The cycle value specifies whether the standards compliance values were determined at the last official eBay evaluation or at the time of the request.",
+    "source": "src/types/sell-apps/analytics-and-report/sellAnalyticsV1Oas3.ts"
+  },
+  {
+    "id": "analytics.getSellerStandardsProfile",
+    "family": "analytics",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/analytics/v1/seller_standards_profile/{program}/{cycle}",
+    "pathParameters": [
+      "program",
+      "cycle"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.analytics.readonly",
+    "token": "user",
+    "description": "This call retrieves a single standards profile for the associated seller. A standards profile is a set of eBay seller metrics and the seller's associated compliance values (either TOP_RATED , ABOVE_STANDARD , or BELOW_STANDARD ). A seller can have multiple profiles distinguished by two criteria, a \"program\" and a \"cycle.\" A profile's program is one of three regions where the seller may have done business, or PROGRAM_GLOBAL to indicate all marketplaces where the seller has done business. The cycle value specifies whether the standards compliance values were determined at the last official eBay evaluation ( CURRENT ) or at the time of the request ( PROJECTED ). Both cycle and a program values are required URI parameters for this method.",
+    "source": "src/types/sell-apps/analytics-and-report/sellAnalyticsV1Oas3.ts"
+  },
+  {
+    "id": "analytics.getTrafficReport",
+    "family": "analytics",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/analytics/v1/traffic_report",
+    "pathParameters": [],
+    "queryParameters": [
+      "dimension",
+      "filter",
+      "metric",
+      "sort"
+    ],
+    "requiredQuery": [],
+    "scope": "sell.analytics.readonly",
+    "token": "user",
+    "description": "This method returns a report that details the user traffic received by a seller's listings. A traffic report gives sellers the ability to review how often their listings appeared on eBay, how many times their listings are viewed, and how many purchases were made. The report also returns the report's start and end dates, and the date the information was last updated. For more information, see Traffic report details",
+    "source": "src/types/sell-apps/analytics-and-report/sellAnalyticsV1Oas3.ts"
+  },
+  {
+    "id": "metadata.getAutomotivePartsCompatibilityPolicies",
+    "family": "metadata",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/metadata/v1/marketplace/{marketplace_id}/get_automotive_parts_compatibility_policies",
+    "pathParameters": [
+      "marketplace_id"
+    ],
+    "queryParameters": [
+      "filter"
+    ],
+    "requiredQuery": [],
+    "scope": "",
+    "token": "application",
+    "description": "This method returns the eBay policies that define how to list automotive parts compatibility items in the categories of the specified marketplace. By default, this method returns all categories that support parts compatibility. You can limit the size of the result set by using the filter query parameter to specify only the category IDs you want to review. Note: To return policy information for the eBay US marketplace, specify EBAY_MOTORS_US as the path parameter for marketplace_id . Tip: This method can potentially return a very large response payload. eBay recommends that the response payload be compressed by passing in the Accept-Encoding request header and setting the value to gzip . If you specify a valid marketplace ID but that marketplace does not contain policy information, or if you filter out all results, a 204 No content status code is returned with an empty response body.",
+    "source": "src/types/sell-apps/listing-metadata/sellMetadataV1Oas3.ts"
+  },
+  {
+    "id": "metadata.getCategoryPolicies",
+    "family": "metadata",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/metadata/v1/marketplace/{marketplace_id}/get_category_policies",
+    "pathParameters": [
+      "marketplace_id"
+    ],
+    "queryParameters": [
+      "filter"
+    ],
+    "requiredQuery": [],
+    "scope": "",
+    "token": "application",
+    "description": "This method returns eBay category policy metadata for all leaf categories on the specified marketplace. By default, this method returns metadata on all leaf categories. You can limit the size of the result set by using the filter query parameter to specify only the leaf category IDs you want to review. If you specify a valid marketplace ID but that marketplace does not contain policy information, or if you filter out all results, a successful call returns a 204 No content status code with an empty response body.",
+    "source": "src/types/sell-apps/listing-metadata/sellMetadataV1Oas3.ts"
+  },
+  {
+    "id": "metadata.getClassifiedAdPolicies",
+    "family": "metadata",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/metadata/v1/marketplace/{marketplace_id}/get_classified_ad_policies",
+    "pathParameters": [
+      "marketplace_id"
+    ],
+    "queryParameters": [
+      "filter"
+    ],
+    "requiredQuery": [],
+    "scope": "",
+    "token": "application",
+    "description": "This method returns eBay classified ad policy metadata for all leaf categories on the specified marketplace. By default, this method returns metadata on all leaf categories. You can limit the size of the result set by using the filter query parameter to specify only the leaf category IDs you want to review. If you specify a valid marketplace ID but that marketplace does not contain policy information, or if you filter out all results, a successful call returns a 204 No content status code with an empty response body. Note: This method does not support classified ads for eBay US Motors categories (EBAY_MOTORS_US). For eBay Motors Pro users, use getMotorsListingPolicies .",
+    "source": "src/types/sell-apps/listing-metadata/sellMetadataV1Oas3.ts"
+  },
+  {
+    "id": "metadata.getCurrencies",
+    "family": "metadata",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/metadata/v1/marketplace/{marketplace_id}/get_currencies",
+    "pathParameters": [
+      "marketplace_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "",
+    "token": "application",
+    "description": "This method returns the default currency used by the eBay marketplace specified in the request. This is the currency that the seller should use when providing price data for this marketplace through listing APIs.",
+    "source": "src/types/sell-apps/listing-metadata/sellMetadataV1Oas3.ts"
+  },
+  {
+    "id": "metadata.getExtendedProducerResponsibilityPolicies",
+    "family": "metadata",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/metadata/v1/marketplace/{marketplace_id}/get_extended_producer_responsibility_policies",
+    "pathParameters": [
+      "marketplace_id"
+    ],
+    "queryParameters": [
+      "filter"
+    ],
+    "requiredQuery": [],
+    "scope": "",
+    "token": "application",
+    "description": "This method returns the Extended Producer Responsibility policies for one, multiple, or all eBay categories in an eBay marketplace. The identifier of the eBay marketplace is passed in as a path parameter, and unless one or more eBay category IDs are passed in through the filter query parameter, this method will return metadata on every applicable category for the specified marketplace. Note: Currently, the Extended Producer Responsibility policies are only applicable to a limited number of categories. Note: Extended Producer Responsibility IDs are no longer set at the listing level so category-level metadata is no longer returned. Instead, sellers will provide/manage these IDs at the account level by going to Account Settings . Tip: This method can potentially return a very large response payload. eBay recommends that the response payload be compressed by passing in the Accept-Encoding request header and setting the value to gzip .",
+    "source": "src/types/sell-apps/listing-metadata/sellMetadataV1Oas3.ts"
+  },
+  {
+    "id": "metadata.getHazardousMaterialsLabels",
+    "family": "metadata",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/metadata/v1/marketplace/{marketplace_id}/get_hazardous_materials_labels",
+    "pathParameters": [
+      "marketplace_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "",
+    "token": "application",
+    "description": "This method returns hazardous materials label information for the specified eBay marketplace. The information includes IDs, descriptions, and URLs (as applicable) for the available signal words, statements, and pictograms. The returned statements are localized for the default language of the marketplace. If a marketplace does not support hazardous materials label information, no response payload is returned, but only a 204 No content status code. This information is used by the seller to add hazardous materials label related information to their listings (see Specifying hazardous material related information ).",
+    "source": "src/types/sell-apps/listing-metadata/sellMetadataV1Oas3.ts"
+  },
+  {
+    "id": "metadata.getItemConditionPolicies",
+    "family": "metadata",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/metadata/v1/marketplace/{marketplace_id}/get_item_condition_policies",
+    "pathParameters": [
+      "marketplace_id"
+    ],
+    "queryParameters": [
+      "filter"
+    ],
+    "requiredQuery": [],
+    "scope": "",
+    "token": "application",
+    "description": "This method returns item condition metadata on one, multiple, or all eBay categories on an eBay marketplace. This metadata consists of the different item conditions (with IDs) that an eBay category supports, and a boolean to indicate if an eBay category requires an item condition. If applicable, this metadata also shows the different condition descriptors (with IDs) that an eBay category supports. Note: Currently, condition grading is only applicable to the following trading card categories: Non-Sport Trading Card Singles CCG Individual Cards Sports Trading Cards Singles The identifier of the eBay marketplace is passed in as a path parameter, and unless one or more eBay category IDs are passed in through the filter query parameter, this method will return metadata on every single category for the specified marketplace. If you only want to view item condition metadata for one eBay category or a select group of eBay categories, you can pa",
+    "source": "src/types/sell-apps/listing-metadata/sellMetadataV1Oas3.ts"
+  },
+  {
+    "id": "metadata.getListingStructurePolicies",
+    "family": "metadata",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/metadata/v1/marketplace/{marketplace_id}/get_listing_structure_policies",
+    "pathParameters": [
+      "marketplace_id"
+    ],
+    "queryParameters": [
+      "filter"
+    ],
+    "requiredQuery": [],
+    "scope": "",
+    "token": "application",
+    "description": "This method returns the eBay policies that define the allowed listing structures for the categories of a specific marketplace. The listing-structure policies currently pertain to whether or not you can list items with variations. By default, this method returns the entire category tree for the specified marketplace. You can limit the size of the result set by using the filter query parameter to specify only the category IDs you want to review. Tip: This method can potentially return a very large response payload. eBay recommends that the response payload be compressed by passing in the Accept-Encoding request header and setting the value to gzip .",
+    "source": "src/types/sell-apps/listing-metadata/sellMetadataV1Oas3.ts"
+  },
+  {
+    "id": "metadata.getListingTypePolicies",
+    "family": "metadata",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/metadata/v1/marketplace/{marketplace_id}/get_listing_type_policies",
+    "pathParameters": [
+      "marketplace_id"
+    ],
+    "queryParameters": [
+      "filter"
+    ],
+    "requiredQuery": [],
+    "scope": "",
+    "token": "application",
+    "description": "This method returns eBay listing type policy metadata for all leaf categories on the specified marketplace. By default, this method returns metadata on all leaf categories. You can limit the size of the result set by using the filter query parameter to specify only the leaf category IDs you want to review. If you specify a valid marketplace ID but that marketplace does not contain policy information, or if you filter out all results, a successful call returns a 204 No content status code with an empty response body.",
+    "source": "src/types/sell-apps/listing-metadata/sellMetadataV1Oas3.ts"
+  },
+  {
+    "id": "metadata.getMotorsListingPolicies",
+    "family": "metadata",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/metadata/v1/marketplace/{marketplace_id}/get_motors_listing_policies",
+    "pathParameters": [
+      "marketplace_id"
+    ],
+    "queryParameters": [
+      "filter"
+    ],
+    "requiredQuery": [],
+    "scope": "",
+    "token": "application",
+    "description": "This method returns eBay Motors policy metadata for all leaf categories on the specified marketplace. By default, this method returns metadata on all leaf categories. You can limit the size of the result set by using the filter query parameter to specify only the leaf category IDs you want to review. If you specify a valid marketplace ID but that marketplace does not contain policy information, or if you filter out all results, a successful call returns a 204 No content status code with an empty response body. Note: To return policy information for eBay US Motors categories, specify marketplace_id as EBAY_MOTORS_US .",
+    "source": "src/types/sell-apps/listing-metadata/sellMetadataV1Oas3.ts"
+  },
+  {
+    "id": "metadata.getNegotiatedPricePolicies",
+    "family": "metadata",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/metadata/v1/marketplace/{marketplace_id}/get_negotiated_price_policies",
+    "pathParameters": [
+      "marketplace_id"
+    ],
+    "queryParameters": [
+      "filter"
+    ],
+    "requiredQuery": [],
+    "scope": "",
+    "token": "application",
+    "description": "This method returns the eBay policies that define the supported negotiated price features (like \"best offer\") for the categories of a specific marketplace. By default, this method returns the entire category tree for the specified marketplace. You can limit the size of the result set by using the filter query parameter to specify only the category IDs you want to review. Tip: This method can potentially return a very large response payload. eBay recommends that the response payload be compressed by passing in the Accept-Encoding request header and setting the value to gzip .",
+    "source": "src/types/sell-apps/listing-metadata/sellMetadataV1Oas3.ts"
+  },
+  {
+    "id": "metadata.getProductSafetyLabels",
+    "family": "metadata",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/metadata/v1/marketplace/{marketplace_id}/get_product_safety_labels",
+    "pathParameters": [
+      "marketplace_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "",
+    "token": "application",
+    "description": "This method returns product safety label information for the specified eBay marketplace. The information includes IDs, descriptions, and URLs (as applicable) for the available statements and pictograms. The returned statements are localized for the default language of the marketplace. If a marketplace does not support product safety label information, no response payload is returned, but only a 204 No content status code. This information is used by the seller to add product safety label related information to their listings. The getRegulatoryPolicies method can be used to see which categories recommend or require product safety labels.",
+    "source": "src/types/sell-apps/listing-metadata/sellMetadataV1Oas3.ts"
+  },
+  {
+    "id": "metadata.getRegulatoryPolicies",
+    "family": "metadata",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/metadata/v1/marketplace/{marketplace_id}/get_regulatory_policies",
+    "pathParameters": [
+      "marketplace_id"
+    ],
+    "queryParameters": [
+      "filter"
+    ],
+    "requiredQuery": [],
+    "scope": "",
+    "token": "application",
+    "description": "This method returns regulatory policies for one, multiple, or all eBay categories in an eBay marketplace. The identifier of the eBay marketplace is passed in as a path parameter, and unless one or more eBay category IDs are passed in through the filter query parameter, this method will return metadata for every listing category in the specified marketplace. Tip: This method can potentially return a very large response payload. eBay recommends that the response payload be compressed by passing in the Accept-Encoding request header and setting the value to gzip .",
+    "source": "src/types/sell-apps/listing-metadata/sellMetadataV1Oas3.ts"
+  },
+  {
+    "id": "metadata.getReturnPolicies",
+    "family": "metadata",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/metadata/v1/marketplace/{marketplace_id}/get_return_policies",
+    "pathParameters": [
+      "marketplace_id"
+    ],
+    "queryParameters": [
+      "filter"
+    ],
+    "requiredQuery": [],
+    "scope": "",
+    "token": "application",
+    "description": "This method returns the eBay policies that define whether or not you must include a return policy for the items you list in the categories of a specific marketplace, plus the guidelines for creating domestic and international return policies in the different eBay categories. By default, this method returns the entire category tree for the specified marketplace. You can limit the size of the result set by using the filter query parameter to specify only the category IDs you want to review. Tip: This method can potentially return a very large response payload. eBay recommends that the response payload be compressed by passing in the Accept-Encoding request header and setting the value to gzip .",
+    "source": "src/types/sell-apps/listing-metadata/sellMetadataV1Oas3.ts"
+  },
+  {
+    "id": "metadata.getShippingPolicies",
+    "family": "metadata",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/metadata/v1/marketplace/{marketplace_id}/get_shipping_policies",
+    "pathParameters": [
+      "marketplace_id"
+    ],
+    "queryParameters": [
+      "filter"
+    ],
+    "requiredQuery": [],
+    "scope": "",
+    "token": "application",
+    "description": "This method returns eBay shipping policy metadata for all leaf categories on the specified marketplace. By default, this method returns metadata on all leaf categories. You can limit the size of the result set by using the filter query parameter to specify only the leaf category IDs you want to review. If you specify a valid marketplace ID but that marketplace does not contain policy information, or if you filter out all results, a successful call returns a 204 No content status code with an empty response body.",
+    "source": "src/types/sell-apps/listing-metadata/sellMetadataV1Oas3.ts"
+  },
+  {
+    "id": "metadata.getSiteVisibilityPolicies",
+    "family": "metadata",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/metadata/v1/marketplace/{marketplace_id}/get_site_visibility_policies",
+    "pathParameters": [
+      "marketplace_id"
+    ],
+    "queryParameters": [
+      "filter"
+    ],
+    "requiredQuery": [],
+    "scope": "",
+    "token": "application",
+    "description": "This method returns eBay international site visibility policy metadata for all leaf categories on the specified marketplace. By default, this method returns metadata on all leaf categories. You can limit the size of the result set by using the filter query parameter to specify only the leaf category IDs you want to review. If you specify a valid marketplace ID but that marketplace does not contain policy information, or if you filter out all results, a successful call returns a 204 No content status code with an empty response body.",
+    "source": "src/types/sell-apps/listing-metadata/sellMetadataV1Oas3.ts"
+  },
+  {
+    "id": "metadata.getExcludeShippingLocations",
+    "family": "metadata",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/metadata/v1/shipping/marketplace/{marketplace_id}/get_exclude_shipping_locations",
+    "pathParameters": [
+      "marketplace_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "",
+    "token": "application",
+    "description": "This method retrieves a list of locations that the seller can use as excluded shipping locations within their listings or in their fulfillment business policies for the specified marketplace. These are locations that a seller designates as areas where they will not ship items. Excluded shipping locations and ship-to locations are used in tandem at the listing level and in fulfillment business policies. Excluded shipping locations and ship-to locations share a lot of the same values and they should not contradict each other. Manage excluded shipping locations using business policies through the fulfillment_policy resource of the Account v1 API .",
+    "source": "src/types/sell-apps/listing-metadata/sellMetadataV1Oas3.ts"
+  },
+  {
+    "id": "metadata.getHandlingTimes",
+    "family": "metadata",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/metadata/v1/shipping/marketplace/{marketplace_id}/get_handling_times",
+    "pathParameters": [
+      "marketplace_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "",
+    "token": "application",
+    "description": "This method retrieves a list of supported handling times for the specified marketplace. The handling time returned specifies the maximum number of business days the eBay site allows for shipping an item to domestic buyers after receiving a cleared payment. Handling times apply to both domestic and international orders. If the handling time is 1 day, the seller commits to dropping the item off for shipment one business day after payment clears. Manage handing times using business policies through the fulfillment_policy resource of the Account v1 API .",
+    "source": "src/types/sell-apps/listing-metadata/sellMetadataV1Oas3.ts"
+  },
+  {
+    "id": "metadata.getShippingCarriers",
+    "family": "metadata",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/metadata/v1/shipping/marketplace/{marketplace_id}/get_shipping_carriers",
+    "pathParameters": [
+      "marketplace_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "",
+    "token": "application",
+    "description": "This method retrieves a list of supported shipping carriers for the specified marketplace. It provides essential information for sellers to understand which shipping carriers are available for use when listing items on that eBay marketplace. Knowing the supported carriers can help sellers optimize their shipping options and ensure efficient delivery to buyers. The value returned in the shippingCarrier field is the enumerated value required when providing shipment tracking information for that carrier. Tip: Use the getShippingServices method to explore available shipping services for each carrier. Manage shipping carriers using business policies through the fulfillment_policy resource of the Account v1 API .",
+    "source": "src/types/sell-apps/listing-metadata/sellMetadataV1Oas3.ts"
+  },
+  {
+    "id": "metadata.getShippingLocations",
+    "family": "metadata",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/metadata/v1/shipping/marketplace/{marketplace_id}/get_shipping_locations",
+    "pathParameters": [
+      "marketplace_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "",
+    "token": "application",
+    "description": "This method retrieves a list of supported shipping locations for the specified marketplace. It provides sellers with information on where they can ship their items. Sellers can use this information to configure their shipping settings. Tip: Use the getExcludeShippingLocations method to return locations where the seller does not ship. Manage shipping locations using business policies through the fulfillment_policy resource of the Account v1 API .",
+    "source": "src/types/sell-apps/listing-metadata/sellMetadataV1Oas3.ts"
+  },
+  {
+    "id": "metadata.getShippingServices",
+    "family": "metadata",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/metadata/v1/shipping/marketplace/{marketplace_id}/get_shipping_services",
+    "pathParameters": [
+      "marketplace_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "",
+    "token": "application",
+    "description": "This method retrieves a list of shipping services supported for the specified marketplace, including valid shipping services, shipping times, and package constraints such as size and weight. Manage shipping services using business policies through the fulfillment_policy resource of the Account v1 API .",
+    "source": "src/types/sell-apps/listing-metadata/sellMetadataV1Oas3.ts"
+  },
+  {
+    "id": "metadata.getSalesTaxJurisdictions",
+    "family": "metadata",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/metadata/v1/country/{countryCode}/sales_tax_jurisdiction",
+    "pathParameters": [
+      "countryCode"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "",
+    "token": "application",
+    "description": "This method retrieves all sales-tax jurisdictions for the country specified in the countryCode path parameter. Countries with valid sales-tax jurisdictions are Canada and the US. The response from this call tells you the jurisdictions for which a seller can configure tax tables. Although setting up tax tables is optional, you can use the createOrReplaceSalesTax method in the Account API call to configure the tax tables for the jurisdictions into which you sell. Note: Sales-tax tables are only available for the US (EBAY_US) and Canada (EBAY_CA) marketplaces. Important! In the US, eBay now calculates, collects, and remits sales tax to the proper taxing authorities in all 50 states and Washington, DC. Sellers can no longer specify sales-tax rates for these jurisdictions using a tax table. However, sellers may continue to use a sales-tax table to set rates for the following US territories: American Samoa (AS) Guam (GU) Northern Mariana Isla",
+    "source": "src/types/sell-apps/listing-metadata/sellMetadataV1Oas3.ts"
+  },
+  {
+    "id": "taxonomy.fetchItemAspects",
+    "family": "taxonomy",
+    "method": "GET",
+    "host": "api",
+    "path": "/commerce/taxonomy/v1/category_tree/{category_tree_id}/fetch_item_aspects",
+    "pathParameters": [
+      "category_tree_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "",
+    "token": "application",
+    "description": "parameters: { query?: never; header?: never; path?: never; cookie?: never; }; /** * Get Aspects for All Leaf Categories in a Marketplace * @description This method returns a complete list of aspects for all of the leaf categories that belong to an eBay marketplace. The eBay marketplace is specified through the category_tree_id URI parameter. Note: A successful call returns a payload as a gzipped JSON file sent as a binary file using the content-type:application/octet-stream in the response. This file may be large (over 100 MB, compressed). Extract the JSON file from the compressed file with a utility that handles .gz or .gzip. The open source Taxonomy SDK can be used to compare the aspect metadata that is returned in this response. The Taxonomy SDK uses this call to surface changes (new, modified, and removed entities) between an updated version of a bulk downloaded file relative to a previous version.",
+    "source": "src/types/sell-apps/listing-metadata/commerceTaxonomyV1Oas3.ts"
+  },
+  {
+    "id": "taxonomy.getDefaultCategoryTreeId",
+    "family": "taxonomy",
+    "method": "GET",
+    "host": "api",
+    "path": "/commerce/taxonomy/v1/get_default_category_tree_id",
+    "pathParameters": [],
+    "queryParameters": [
+      "marketplace_id"
+    ],
+    "requiredQuery": [
+      "marketplace_id"
+    ],
+    "scope": "",
+    "token": "application",
+    "description": "parameters: { query?: never; header?: never; path?: never; cookie?: never; }; /** * Get a Default Category Tree ID * @description A given eBay marketplace might use multiple category trees, but one of those trees is considered to be the default for that marketplace. This call retrieves a reference to the default category tree associated with the specified eBay marketplace ID. The response includes only the tree's unique identifier and version, which you can use to retrieve more details about the tree, its structure, and its individual category nodes.",
+    "source": "src/types/sell-apps/listing-metadata/commerceTaxonomyV1Oas3.ts"
+  },
+  {
+    "id": "taxonomy.getCategoryTree",
+    "family": "taxonomy",
+    "method": "GET",
+    "host": "api",
+    "path": "/commerce/taxonomy/v1/category_tree/{category_tree_id}",
+    "pathParameters": [
+      "category_tree_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "",
+    "token": "application",
+    "description": "parameters: { query?: never; header?: never; path?: never; cookie?: never; }; /** * Get a Category Tree * @description This method retrieves the complete category tree that is identified by the category_tree_id parameter. The value of category_tree_id was returned by the getDefaultCategoryTreeId method in the categoryTreeId field. The response contains details of all nodes of the specified eBay category tree, as well as the eBay marketplaces that use this category tree. Note: This method can return a very large payload, so gzip compression is supported. To enable gzip compression, include the Accept-Encoding header and set its value to gzip as shown below: Accept-Encoding: gzip",
+    "source": "src/types/sell-apps/listing-metadata/commerceTaxonomyV1Oas3.ts"
+  },
+  {
+    "id": "taxonomy.getCategorySubtree",
+    "family": "taxonomy",
+    "method": "GET",
+    "host": "api",
+    "path": "/commerce/taxonomy/v1/category_tree/{category_tree_id}/get_category_subtree",
+    "pathParameters": [
+      "category_tree_id"
+    ],
+    "queryParameters": [
+      "category_id"
+    ],
+    "requiredQuery": [
+      "category_id"
+    ],
+    "scope": "",
+    "token": "application",
+    "description": "parameters: { query?: never; header?: never; path?: never; cookie?: never; }; /** * Get a Category Subtree * @description This call retrieves the details of all nodes of the category tree hierarchy (the subtree) below a specified category of a category tree. You identify the tree using the category_tree_id parameter, which was returned by the getDefaultCategoryTreeId call in the categoryTreeId field. Note: This method can return a very large payload, so gzip compression is supported. To enable gzip compression, include the Accept-Encoding header and set its value to gzip as shown below: Accept-Encoding: gzip",
+    "source": "src/types/sell-apps/listing-metadata/commerceTaxonomyV1Oas3.ts"
+  },
+  {
+    "id": "taxonomy.getCategorySuggestions",
+    "family": "taxonomy",
+    "method": "GET",
+    "host": "api",
+    "path": "/commerce/taxonomy/v1/category_tree/{category_tree_id}/get_category_suggestions",
+    "pathParameters": [
+      "category_tree_id"
+    ],
+    "queryParameters": [
+      "q"
+    ],
+    "requiredQuery": [
+      "q"
+    ],
+    "scope": "",
+    "token": "application",
+    "description": "parameters: { query?: never; header?: never; path?: never; cookie?: never; }; /** * Get Suggested Categories * @description This call returns an array of category tree leaf nodes in the specified category tree that are considered by eBay to most closely correspond to the query string q . Returned with each suggested node is a localized name for that category (based on the Accept-Language header specified for the call), and details about each of the category's ancestor nodes, extending from its immediate parent up to the root of the category tree. You identify the tree using the category_tree_id parameter, which was returned by the getDefaultCategoryTreeId call in the categoryTreeId field. Important: This call is not supported in the Sandbox environment. It will return a response payload in which the categoryName fields contain random or boilerplate text regardless of the query submitted.",
+    "source": "src/types/sell-apps/listing-metadata/commerceTaxonomyV1Oas3.ts"
+  },
+  {
+    "id": "taxonomy.getItemAspectsForCategory",
+    "family": "taxonomy",
+    "method": "GET",
+    "host": "api",
+    "path": "/commerce/taxonomy/v1/category_tree/{category_tree_id}/get_item_aspects_for_category",
+    "pathParameters": [
+      "category_tree_id"
+    ],
+    "queryParameters": [
+      "category_id"
+    ],
+    "requiredQuery": [
+      "category_id"
+    ],
+    "scope": "",
+    "token": "application",
+    "description": "This call returns a list of aspects that are appropriate or necessary for accurately describing items in the specified leaf category. Each aspect identifies an item attribute (for example, color,) for which the seller will be required or encouraged to provide a value (or variation values) when offering an item in that category on eBay. For each aspect, getItemAspectsForCategory provides complete metadata, including: The aspect's data type, format, and entry mode Whether the aspect is required in listings Whether the aspect can be used for item variations Whether the aspect accepts multiple values for an item Allowed values for the aspect Use this information to construct an interface through which sellers can enter or select the appropriate values for their items or item variations. Once you collect those values, include them as product aspects when creating inventory items using the Inventory API.",
+    "source": "src/types/sell-apps/listing-metadata/commerceTaxonomyV1Oas3.ts"
+  },
+  {
+    "id": "taxonomy.getCompatibilityProperties",
+    "family": "taxonomy",
+    "method": "GET",
+    "host": "api",
+    "path": "/commerce/taxonomy/v1/category_tree/{category_tree_id}/get_compatibility_properties",
+    "pathParameters": [
+      "category_tree_id"
+    ],
+    "queryParameters": [
+      "category_id"
+    ],
+    "requiredQuery": [
+      "category_id"
+    ],
+    "scope": "",
+    "token": "application",
+    "description": "parameters: { query?: never; header?: never; path?: never; cookie?: never; }; /** * Get Compatibility Properties * @description This call retrieves the compatible vehicle aspects that are used to define a motor vehicle that is compatible with a motor vehicle part or accessory. The values that are retrieved here might include motor vehicle aspects such as 'Make', 'Model', 'Year', 'Engine', and 'Trim', and each of these aspects are localized for the eBay marketplace. The category_tree_id value is passed in as a path parameter, and this value identifies the eBay category tree. The category_id value is passed in as a query parameter, as this parameter is also required. The specified category must be a category that supports parts compatibility. At this time, this operation only supports parts and accessories listings for cars, trucks, and motorcycles (not boats, power sports, or any other vehicle types). Only the following eBay marketplaces",
+    "source": "src/types/sell-apps/listing-metadata/commerceTaxonomyV1Oas3.ts"
+  },
+  {
+    "id": "taxonomy.getCompatibilityPropertyValues",
+    "family": "taxonomy",
+    "method": "GET",
+    "host": "api",
+    "path": "/commerce/taxonomy/v1/category_tree/{category_tree_id}/get_compatibility_property_values",
+    "pathParameters": [
+      "category_tree_id"
+    ],
+    "queryParameters": [
+      "compatibility_property",
+      "category_id",
+      "filter"
+    ],
+    "requiredQuery": [
+      "compatibility_property",
+      "category_id"
+    ],
+    "scope": "",
+    "token": "application",
+    "description": "parameters: { query?: never; header?: never; path?: never; cookie?: never; }; /** * Get Compatibility Property Values * @description This call retrieves applicable compatible vehicle property values based on the specified eBay marketplace, specified eBay category, and filters used in the request. Compatible vehicle properties are returned in the compatibilityProperties.name field of a getCompatibilityProperties response. One compatible vehicle property applicable to the specified eBay marketplace and eBay category is specified through the required compatibility_property filter. Then, the user has the option of further restricting the compatible vehicle property values that are returned in the response by specifying one or more compatible vehicle property name/value pairs through the filter query parameter. See the documentation in URI parameters section for more information on using the compatibility_property and filter query parameters",
+    "source": "src/types/sell-apps/listing-metadata/commerceTaxonomyV1Oas3.ts"
+  },
+  {
+    "id": "taxonomy.getExpiredCategories",
+    "family": "taxonomy",
+    "method": "GET",
+    "host": "api",
+    "path": "/commerce/taxonomy/v1/category_tree/{category_tree_id}/get_expired_categories",
+    "pathParameters": [
+      "category_tree_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "",
+    "token": "application",
+    "description": "This method retrieves the mappings of expired leaf categories in the specified category tree to their corresponding active leaf categories. Note that in some cases, several expired categories are mapped to a single active category. Note: This method only returns information about categories that have been mapped (i.e., combined categories and split categories). It does not return information about expired categories that have no corresponding active categories. When a category expires in this manner, any completed items that were listed in the expired category can still be found, but new listings cannot be created in the category.",
+    "source": "src/types/sell-apps/listing-metadata/commerceTaxonomyV1Oas3.ts"
+  },
+  {
+    "id": "charity.getCharityOrg",
+    "family": "charity",
+    "method": "GET",
+    "host": "api",
+    "path": "/commerce/charity/v1/charity_org/{charity_org_id}",
+    "pathParameters": [
+      "charity_org_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "",
+    "token": "application",
+    "description": "This call is used to retrieve detailed information about supported charitable organizations. It allows users to retrieve the details for a specific charitable organization using its charity organization ID.",
+    "source": "src/types/sell-apps/listing-metadata/commerceCharityV1Oas3.ts"
+  },
+  {
+    "id": "charity.getCharityOrgs",
+    "family": "charity",
+    "method": "GET",
+    "host": "api",
+    "path": "/commerce/charity/v1/charity_org",
+    "pathParameters": [],
+    "queryParameters": [
+      "limit",
+      "offset",
+      "q",
+      "registration_ids"
+    ],
+    "requiredQuery": [],
+    "scope": "",
+    "token": "application",
+    "description": "This call is used to search for supported charitable organizations. It allows users to search for a specific charitable organization, or for multiple charitable organizations, from a particular charitable domain and/or geographical region, or by using search criteria. The call returns paginated search results containing the charitable organizations that match the specified criteria.",
+    "source": "src/types/sell-apps/listing-metadata/commerceCharityV1Oas3.ts"
+  },
+  {
+    "id": "notification.getConfig",
+    "family": "notification",
+    "method": "GET",
+    "host": "api",
+    "path": "/commerce/notification/v1/config",
+    "pathParameters": [],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "",
+    "token": "application",
+    "description": "This method allows applications to retrieve a previously created configuration.",
+    "source": "src/types/sell-apps/communication/commerceNotificationV1Oas3.ts"
+  },
+  {
+    "id": "notification.getPublicKey",
+    "family": "notification",
+    "method": "GET",
+    "host": "api",
+    "path": "/commerce/notification/v1/public_key/{public_key_id}",
+    "pathParameters": [
+      "public_key_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "",
+    "token": "application",
+    "description": "This method allows users to retrieve a public key using a specified key ID. The public key that is returned in the response payload is used to process and validate eBay notifications. The public key ID, which is a required request parameter for this method, is retrieved from the Base64-encoded X-EBAY-SIGNATURE header that is included in the eBay notification. Important! The retrieved public key value should be cached for a temporary — but reasonable — amount of time (e.g., one-hour is recommended.) This key should not be requested for every notification since doing so can result in exceeding API call limits if a large number of notification requests is received. Note: For more details about how to process eBay push notifications and validate notification message payloads, see the Notification API overview .",
+    "source": "src/types/sell-apps/communication/commerceNotificationV1Oas3.ts"
+  },
+  {
+    "id": "notification.getSubscriptions",
+    "family": "notification",
+    "method": "GET",
+    "host": "api",
+    "path": "/commerce/notification/v1/subscription",
+    "pathParameters": [],
+    "queryParameters": [
+      "continuation_token",
+      "limit"
+    ],
+    "requiredQuery": [],
+    "scope": "commerce.notification.subscription.readonly",
+    "token": "user",
+    "description": "This method allows applications to retrieve a list of all subscriptions. The list returned is a paginated collection of subscription resources. Subscriptions allow applications to express interest in notifications and keep receiving the information relevant to their business.",
+    "source": "src/types/sell-apps/communication/commerceNotificationV1Oas3.ts"
+  },
+  {
+    "id": "notification.getSubscription",
+    "family": "notification",
+    "method": "GET",
+    "host": "api",
+    "path": "/commerce/notification/v1/subscription/{subscription_id}",
+    "pathParameters": [
+      "subscription_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "commerce.notification.subscription.readonly",
+    "token": "user",
+    "description": "This method allows applications to retrieve subscription details for the specified subscription. Specify the subscription to retrieve using the subscription_id . Use the getSubscriptions method to browse all subscriptions if you do not know the subscription_id . Subscriptions allow applications to express interest in notifications and keep receiving the information relevant to their business.",
+    "source": "src/types/sell-apps/communication/commerceNotificationV1Oas3.ts"
+  },
+  {
+    "id": "notification.getSubscriptionFilter",
+    "family": "notification",
+    "method": "GET",
+    "host": "api",
+    "path": "/commerce/notification/v1/subscription/{subscription_id}/filter/{filter_id}",
+    "pathParameters": [
+      "subscription_id",
+      "filter_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "commerce.notification.subscription.readonly",
+    "token": "user",
+    "description": "This method allows applications to retrieve the filter details for the specified subscription filter. Specify the subscription filter to retrieve by using the subscription_id and the filter_id associated with the subscription filter. The filter_id can be found in the response body for the getSubscription method, if there is a filter applied on the subscription. Filters allow applications to only be sent notifications that match a provided criteria. Notifications that do not match this criteria will not be sent to the destination.",
+    "source": "src/types/sell-apps/communication/commerceNotificationV1Oas3.ts"
+  },
+  {
+    "id": "notification.getTopic",
+    "family": "notification",
+    "method": "GET",
+    "host": "api",
+    "path": "/commerce/notification/v1/topic/{topic_id}",
+    "pathParameters": [
+      "topic_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "",
+    "token": "application",
+    "description": "This method allows applications to retrieve details for the specified topic. This information includes supported schema versions, formats, and other metadata for the topic. Applications can subscribe to any of the topics for a supported schema version and format, limited by the authorization scopes required to subscribe to the topic. A topic specifies the type of information to be received and the data types associated with an event. An event occurs in the eBay system, such as when a user requests deletion or revokes access for an application. An event is an instance of an event type (topic). Specify the topic to retrieve using the topic_id URI parameter. Note: Use the getTopics method to find a topic if you do not know the topic ID.",
+    "source": "src/types/sell-apps/communication/commerceNotificationV1Oas3.ts"
+  },
+  {
+    "id": "notification.getTopics",
+    "family": "notification",
+    "method": "GET",
+    "host": "api",
+    "path": "/commerce/notification/v1/topic",
+    "pathParameters": [],
+    "queryParameters": [
+      "continuation_token",
+      "limit"
+    ],
+    "requiredQuery": [],
+    "scope": "",
+    "token": "application",
+    "description": "This method returns a paginated collection of all supported topics, along with the details for the topics. This information includes supported schema versions, formats, and other metadata for the topics. Applications can subscribe to any of the topics for a supported schema version and format, limited by the authorization scopes required to subscribe to the topic. A topic specifies the type of information to be received and the data types associated with an event. An event occurs in the eBay system, such as when a user requests deletion or revokes access for an application. An event is an instance of an event type (topic).",
+    "source": "src/types/sell-apps/communication/commerceNotificationV1Oas3.ts"
+  },
+  {
+    "id": "message.getConversation",
+    "family": "message",
+    "method": "GET",
+    "host": "api",
+    "path": "/commerce/message/v1/conversation/{conversation_id}",
+    "pathParameters": [
+      "conversation_id"
+    ],
+    "queryParameters": [
+      "conversation_type",
+      "limit",
+      "offset"
+    ],
+    "requiredQuery": [
+      "conversation_type"
+    ],
+    "scope": "commerce.message",
+    "token": "user",
+    "description": "This method can be used to retrieve messages within a specific conversation. The conversation_id of the conversation for which to retrieve messages is required as path parameters, and the and conversation_type of the conversation is required as a query parameter.",
+    "source": "src/types/sell-apps/communication/commerceMessageV1Oas3.ts"
+  },
+  {
+    "id": "message.getConversations",
+    "family": "message",
+    "method": "GET",
+    "host": "api",
+    "path": "/commerce/message/v1/conversation",
+    "pathParameters": [],
+    "queryParameters": [
+      "conversation_status",
+      "conversation_type",
+      "end_time",
+      "limit",
+      "offset",
+      "other_party_username",
+      "reference_id",
+      "reference_type",
+      "start_time"
+    ],
+    "requiredQuery": [
+      "conversation_type"
+    ],
+    "scope": "commerce.message",
+    "token": "user",
+    "description": "This method can be used to retrieve one or more conversations associated with a user. The conversation_type query parameter is required when using this method to specify if the retrieved conversations are from eBay or from members. The result set can also optionally be filtered by conversation status, reference, username, and/or time range. The limit and offset path parameters can be used to paginate the result set and control how many conversations are returned in the response.",
+    "source": "src/types/sell-apps/communication/commerceMessageV1Oas3.ts"
+  },
+  {
+    "id": "negotiation.findEligibleItems",
+    "family": "negotiation",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/negotiation/v1/find_eligible_items",
+    "pathParameters": [],
+    "queryParameters": [
+      "limit",
+      "offset"
+    ],
+    "requiredQuery": [],
+    "scope": "sell.inventory.readonly",
+    "token": "user",
+    "description": "This method evaluates a seller's current listings and returns the set of IDs that are eligible for a seller-initiated discount offer to a buyer. A listing ID is returned only when one or more buyers have shown an \"interest\" in the listing. If any buyers have shown interest in a listing, the seller can initiate a \"negotiation\" with them by calling sendOfferToInterestedBuyers , which sends all interested buyers a message that offers the listing at a discount. For details about how to create seller offers to buyers, see Sending offers to buyers .",
+    "source": "src/types/sell-apps/communication/sellNegotiationV1Oas3.ts"
+  },
+  {
+    "id": "feedback.getItemsAwaitingFeedback",
+    "family": "feedback",
+    "method": "GET",
+    "host": "api",
+    "path": "/commerce/feedback/v1/awaiting_feedback",
+    "pathParameters": [],
+    "queryParameters": [
+      "filter",
+      "limit",
+      "offset",
+      "sort"
+    ],
+    "requiredQuery": [],
+    "scope": "commerce.feedback",
+    "token": "user",
+    "description": "This method retrieves line items awaiting feedback from the user's order partner. You can refine the results using optional filter query parameters, such as item ID, user name, or user role in the transaction. Sorting and pagination features help organize and navigate returned items efficiently. For sellers, only sold items that have not yet received feedback are included. For buyers, only purchased items for which feedback is still pending are included. If the user is both a buyer and a seller, this API returns items awaiting feedback for transactions where the user acted as either. Applying filters can limit results to either buyer-only or seller-only transactions. The response provides an overview of feedback yet to be left for completed transactions (as filtered), with counts for both the buyer and seller roles. It includes an array of line items, each containing the listing ID, title, price (with currency and value). For each line ",
+    "source": "src/types/sell-apps/communication/commerceFeedbackV1BetaOas3.ts"
+  },
+  {
+    "id": "feedback.getFeedback",
+    "family": "feedback",
+    "method": "GET",
+    "host": "api",
+    "path": "/commerce/feedback/v1/feedback",
+    "pathParameters": [],
+    "queryParameters": [
+      "feedback_id",
+      "feedback_type",
+      "filter",
+      "limit",
+      "listing_id",
+      "offset",
+      "order_line_item_id",
+      "sort",
+      "transaction_id",
+      "user_id"
+    ],
+    "requiredQuery": [
+      "feedback_type",
+      "user_id"
+    ],
+    "scope": "commerce.feedback.readonly",
+    "token": "application",
+    "description": "This method enables users to retrieve feedback for any specified user ID and feedback type (sent or received). You can refine the results using optional query parameters such as its feedback ID, listing ID, or order line item ID, or applying one or more filters. Applying filters can narrow results using criteria such as comment type, photos, or topics identified through AI-based analysis. When filtering for feedback with photos ( filterImage:true ), only entries with images (entries that include image URLs) are returned. Additionally, feedback can be refined for the number of days to look back, the role of the user providing the feedback, and whether to include automated feedback entries left by eBay. Sorting and pagination features help organize and navigate returned items efficiently. Returned data includes feedback details (such as comment text and type), feedback ratings (covering criteria like overall experience, and for sellers it",
+    "source": "src/types/sell-apps/communication/commerceFeedbackV1BetaOas3.ts"
+  },
+  {
+    "id": "feedback.getFeedbackRatingSummary",
+    "family": "feedback",
+    "method": "GET",
+    "host": "api",
+    "path": "/commerce/feedback/v1/feedback_rating_summary",
+    "pathParameters": [],
+    "queryParameters": [
+      "filter",
+      "user_id"
+    ],
+    "requiredQuery": [
+      "filter",
+      "user_id"
+    ],
+    "scope": "commerce.feedback.readonly",
+    "token": "application",
+    "description": "This method provides a detailed overview of feedback ratings associated with a user in the eBay marketplace. Specify a user ID and apply filters to retrieve summarized feedback data categorized by rating types and user roles. These returned metrics are aggregated, which offers insight into user experiences and performance. Tip: You can use this method to help sellers and buyers understand their marketplace reputation and identify areas for improvement. Returned data provides a summary of feedback ratings for a user by rating type (such as overall experience, communication, or delivery timeliness) for both buyer and seller roles. Each type of rating includes aggregated metrics like averages, counts, unique feedback givers, and the percentage of positive ratings (excluding neutrals). The response also details the distribution of specific rating values, their frequency, and time period (with period units like days or months) over which the",
+    "source": "src/types/sell-apps/communication/commerceFeedbackV1BetaOas3.ts"
+  },
+  {
+    "id": "identity.getUser",
+    "family": "identity",
+    "method": "GET",
+    "host": "apiz",
+    "path": "/commerce/identity/v1/user/",
+    "pathParameters": [],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "commerce.identity.readonly",
+    "token": "user",
+    "description": "This method retrieves the account profile information for an authenticated user, which requires a User access token . What is returned is controlled by the scopes . For a business account you use the default scope commerce.identity.readonly , which returns all the fields in the businessAccount container. These are returned because this is all public information. For an individual account, the fields returned in the individualAccount container are based on the scope you use. Using the default scope, only public information, such as eBay user ID, are returned. For details about what each scope returns, see the Identity API Overview . In the Sandbox, this API returns mock data. Note: You must use the correct scope or scopes for the data you want returned.",
+    "source": "src/types/sell-apps/other-apis/commerceIdentityV1Oas3.ts"
+  },
+  {
+    "id": "vero.getVeroReasonCode",
+    "family": "vero",
+    "method": "GET",
+    "host": "api",
+    "path": "/commerce/vero/v1/vero_reason_code/{vero_reason_code_id}",
+    "pathParameters": [
+      "vero_reason_code_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "commerce.vero",
+    "token": "user",
+    "description": "Important! You must be a member of the Verified Rights Owner (VeRO) Program to use this call. This method is used to retrieve the details of a specific VeRO reason code, including a description of the code and the marketplace associated with the code. The vero_reason_code_id of the VeRO reason code for which to retrieve details is required as a path parameter.",
+    "source": "src/types/sell-apps/other-apis/commerceVeroV1Oas3.ts"
+  },
+  {
+    "id": "vero.getVeroReasonCodes",
+    "family": "vero",
+    "method": "GET",
+    "host": "api",
+    "path": "/commerce/vero/v1/vero_reason_code",
+    "pathParameters": [],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "commerce.vero",
+    "token": "user",
+    "description": "Important! You must be a member of the Verified Rights Owner (VeRO) Program to use this call. This method is used to retrieve the details of an array of VeRO reason codes. This information includes the descriptions of each code, as well as the marketplace associated with each code. If the X-EBAY-C-MARKETPLACE-ID header is present, only VeRO reason codes for that specific site will be returned. If this header is not included, all reason codes for all sites are returned.",
+    "source": "src/types/sell-apps/other-apis/commerceVeroV1Oas3.ts"
+  },
+  {
+    "id": "vero.getVeroReport",
+    "family": "vero",
+    "method": "GET",
+    "host": "api",
+    "path": "/commerce/vero/v1/vero_report/{vero_report_id}",
+    "pathParameters": [
+      "vero_report_id"
+    ],
+    "queryParameters": [
+      "includeItemDetails"
+    ],
+    "requiredQuery": [],
+    "scope": "commerce.vero",
+    "token": "user",
+    "description": "Important! You must be a member of the Verified Rights Owner (VeRO) Program to use this call. This method can be used to retrieve status information about a VeRO report you have submitted to eBay for copyright, trademark, or other intellectual property rights infringement. The vero_report_id path parameter is used to specify the eBay report for which to retrieve status information.",
+    "source": "src/types/sell-apps/other-apis/commerceVeroV1Oas3.ts"
+  },
+  {
+    "id": "vero.getVeroReportItems",
+    "family": "vero",
+    "method": "GET",
+    "host": "api",
+    "path": "/commerce/vero/v1/vero_report_items",
+    "pathParameters": [],
+    "queryParameters": [
+      "filter",
+      "itemId",
+      "limit",
+      "offset"
+    ],
+    "requiredQuery": [],
+    "scope": "commerce.vero",
+    "token": "user",
+    "description": "parameters: { query?: never; header?: never; path?: never; cookie?: never; }; /** * Retrieves status for VERO infringement reports by Brand. * @description Important! You must be a member of the Verified Rights Owner (VeRO) Program to use this call. This method can be used to retrieve status information about one or more VeRO reported items you have submitted. Without the use of any query parameters, the default behavior of this method is to return the status of all VeRO reported items submitted by the seller during the last two years. Use the itemId query parameter to see a specific reported item, and use the filter query to retrieve the status of reported items submitted within a specific date range. Pagination is also available to limit the number of reported items that are retrieved per page of data.",
+    "source": "src/types/sell-apps/other-apis/commerceVeroV1Oas3.ts"
+  },
+  {
+    "id": "edelivery.getActualCosts",
+    "family": "edelivery",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/edelivery_international_shipping/v1/actual_costs",
+    "pathParameters": [],
+    "queryParameters": [
+      "tracking_numbers",
+      "trans_begin_time",
+      "trans_end_time"
+    ],
+    "requiredQuery": [],
+    "scope": "sell.edelivery",
+    "token": "user",
+    "description": "Important! This method is only available for Greater-China based sellers with an active eDIS account. This method is used to retrieve the actual weight and cost for one or more packages based on the provided input criteria. Responses can be filtered by the tracking_numbers query parameter. If this parameter is used, actual costs for each package associated with the provided tracking numbers are returned. Alternatively, responses can be filtered by the trans_begin_time and trans_end_time query parameters. If these parameters are used, the actual costs of all packages created within this date range are returned. Only one filtering method can be used per call.",
+    "source": "src/types/sell-apps/other-apis/sellEdeliveryInternationalShippingOas3.ts"
+  },
+  {
+    "id": "edelivery.getAddressPreferences",
+    "family": "edelivery",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/edelivery_international_shipping/v1/address_preference",
+    "pathParameters": [],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.edelivery",
+    "token": "user",
+    "description": "Important! This method is only available for Greater-China based sellers with an active eDIS account. This method can be used to retrieve information about all the ship-from and/or return addresses associated with a seller's eDIS account.",
+    "source": "src/types/sell-apps/other-apis/sellEdeliveryInternationalShippingOas3.ts"
+  },
+  {
+    "id": "edelivery.getAgents",
+    "family": "edelivery",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/edelivery_international_shipping/v1/agents",
+    "pathParameters": [],
+    "queryParameters": [
+      "limit",
+      "offset"
+    ],
+    "requiredQuery": [],
+    "scope": "sell.edelivery",
+    "token": "user",
+    "description": "Important! This method is only available for Greater-China based sellers with an active eDIS account. This method can be used to retrieve information about the EU Authorized Representative (AR) agent(s) associated with a seller's eDIS account. An EU AR agent acts as a liaison between non-EU manufacturers and European regulatory authorities to ensure compliance with EU regulations. This method returns contact information about each agent, as well as their eBay ID and the countries that they support.",
+    "source": "src/types/sell-apps/other-apis/sellEdeliveryInternationalShippingOas3.ts"
+  },
+  {
+    "id": "edelivery.getBatteryQualifications",
+    "family": "edelivery",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/edelivery_international_shipping/v1/battery_qualifications",
+    "pathParameters": [],
+    "queryParameters": [
+      "limit",
+      "offset"
+    ],
+    "requiredQuery": [],
+    "scope": "sell.edelivery",
+    "token": "user",
+    "description": "Important! This method is only available for Greater-China based sellers with an active eDIS account. This method is used to retrieve all battery qualifications associated with your eDIS account. This includes the type, electronic qualification ID and name, and expiration date for each battery.",
+    "source": "src/types/sell-apps/other-apis/sellEdeliveryInternationalShippingOas3.ts"
+  },
+  {
+    "id": "edelivery.getBundle",
+    "family": "edelivery",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/edelivery_international_shipping/v1/bundle/{bundle_id}",
+    "pathParameters": [
+      "bundle_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.edelivery",
+    "token": "user",
+    "description": "Important! This method is only available for Greater-China based sellers with an active eDIS account. This method is used to retrieved information about a specific bundle based on the provided bundle ID value. The bundle_id value of the bundle to be retrieved must be input as a path parameter in the request. If the call is successful, information about the bundle is returned, such as its associated consign preference ID and the tracking numbers of each package in the bundle.",
+    "source": "src/types/sell-apps/other-apis/sellEdeliveryInternationalShippingOas3.ts"
+  },
+  {
+    "id": "edelivery.getBundleLabel",
+    "family": "edelivery",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/edelivery_international_shipping/v1/bundle/{bundle_id}/label",
+    "pathParameters": [
+      "bundle_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.edelivery",
+    "token": "user",
+    "description": "Important! This method is only available for Greater-China based sellers with an active eDIS account. This method can be used to retrieve the bundle label for a bundle of packages. The bundle for which to retrieve a bundle label is specified through the bundleId path parameter. Bundle labels will be returned as base64 string values which can be converted to PDF files.",
+    "source": "src/types/sell-apps/other-apis/sellEdeliveryInternationalShippingOas3.ts"
+  },
+  {
+    "id": "edelivery.getConsignPreferences",
+    "family": "edelivery",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/edelivery_international_shipping/v1/consign_preference",
+    "pathParameters": [],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.edelivery",
+    "token": "user",
+    "description": "Important! This method is only available for Greater-China based sellers with an active eDIS account. This method can be used to retrieve information about all the pickup, drop-off, and/or forward deployment consign addresses associated with a seller's eDIS account.",
+    "source": "src/types/sell-apps/other-apis/sellEdeliveryInternationalShippingOas3.ts"
+  },
+  {
+    "id": "edelivery.getDropoffSites",
+    "family": "edelivery",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/edelivery_international_shipping/v1/dropoff_sites",
+    "pathParameters": [],
+    "queryParameters": [
+      "limit",
+      "offset"
+    ],
+    "requiredQuery": [],
+    "scope": "sell.edelivery",
+    "token": "user",
+    "description": "Important! This method is only available for Greater-China based sellers with an active eDIS account. This method can be used to retrieve metadata for one or more drop-off sites associated with a seller's eDIS account. Pagination query parameters are provided that allow users to control how many drop-off site locations are returned in the response.",
+    "source": "src/types/sell-apps/other-apis/sellEdeliveryInternationalShippingOas3.ts"
+  },
+  {
+    "id": "edelivery.getHandoverSheet",
+    "family": "edelivery",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/edelivery_international_shipping/v1/handover_sheet",
+    "pathParameters": [],
+    "queryParameters": [
+      "tracking_numbers"
+    ],
+    "requiredQuery": [
+      "tracking_numbers"
+    ],
+    "scope": "sell.edelivery",
+    "token": "user",
+    "description": "Important! This method is only available for Greater-China based sellers with an active eDIS account. This method can be used to retrieve the handover sheet for one or more packages in a pickup request. The tracking numbers for the packages for which to retrieve handover sheets are specified through the tracking_numbers query parameter. The retrieved handover sheet will be returned as a base64 string value, and can be used for confirmation with a pickup contact. Only one handover sheet will be returned for the specified packages.",
+    "source": "src/types/sell-apps/other-apis/sellEdeliveryInternationalShippingOas3.ts"
+  },
+  {
+    "id": "edelivery.getLabels",
+    "family": "edelivery",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/edelivery_international_shipping/v1/labels",
+    "pathParameters": [],
+    "queryParameters": [
+      "page_size",
+      "print_preference",
+      "tracking_numbers"
+    ],
+    "requiredQuery": [
+      "tracking_numbers"
+    ],
+    "scope": "sell.edelivery",
+    "token": "user",
+    "description": "Important! This method is only available for Greater-China based sellers with an active eDIS account. This method can be used to retrieve shipping labels for the one or more specified packages. The packages for which to retrieve shipping labels can be specified through the tracking_numbers query parameter. The page size and print preference settings for the shipping label(s) can also be specified through the query parameters. Shipping labels are returned as base64 string values which can be converted to PDF files. A separate file will be returned for each tracking number specified in the request.",
+    "source": "src/types/sell-apps/other-apis/sellEdeliveryInternationalShippingOas3.ts"
+  },
+  {
+    "id": "edelivery.getPackage",
+    "family": "edelivery",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/edelivery_international_shipping/v1/package/{package_id}",
+    "pathParameters": [
+      "package_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.edelivery",
+    "token": "user",
+    "description": "Important! This method is only available for Greater-China based sellers with an active eDIS account. This method can be used to retrieve a package based on the provided package ID value. The packageId value of the package to be retrieved must be input as a path parameter in the request. If the call is successful, information about the package is returned, such as the package's shipping information (its dimensions, weight, ship from, and ship to address) and information about the item(s) it contains.",
+    "source": "src/types/sell-apps/other-apis/sellEdeliveryInternationalShippingOas3.ts"
+  },
+  {
+    "id": "edelivery.getPackagesByLineItemID",
+    "family": "edelivery",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/edelivery_international_shipping/v1/package/{order_line_item_id}/item",
+    "pathParameters": [
+      "order_line_item_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.edelivery",
+    "token": "user",
+    "description": "Important! This method is only available for Greater-China based sellers with an active eDIS account. This method can be used to retrieve one or more packages based on the provided order line item ID. This method can be followed up with getPackage call to retrieve more detailed information about a specific package.",
+    "source": "src/types/sell-apps/other-apis/sellEdeliveryInternationalShippingOas3.ts"
+  },
+  {
+    "id": "edelivery.getServices",
+    "family": "edelivery",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/edelivery_international_shipping/v1/services",
+    "pathParameters": [],
+    "queryParameters": [
+      "limit",
+      "offset"
+    ],
+    "requiredQuery": [],
+    "scope": "sell.edelivery",
+    "token": "user",
+    "description": "Important! This method is only available for Greater-China based sellers with an active eDIS account. This method can be used to retrieve metadata on available shipping services, such as the name, description, and directions.",
+    "source": "src/types/sell-apps/other-apis/sellEdeliveryInternationalShippingOas3.ts"
+  },
+  {
+    "id": "edelivery.getTracking",
+    "family": "edelivery",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/edelivery_international_shipping/v1/tracking",
+    "pathParameters": [],
+    "queryParameters": [
+      "tracking_number"
+    ],
+    "requiredQuery": [
+      "tracking_number"
+    ],
+    "scope": "sell.edelivery",
+    "token": "user",
+    "description": "Important! This method is only available for Greater-China based sellers with an active eDIS account. This method can be used to retrieve tracking event details for a package associated with the provided tracking number. Each tracking event is returned in the trackingDetails array and includes the description, location, time, and status of the event.",
+    "source": "src/types/sell-apps/other-apis/sellEdeliveryInternationalShippingOas3.ts"
+  },
+  {
+    "id": "marketing.getAds",
+    "family": "marketing",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/marketing/v1/ad_campaign/{campaign_id}/ad",
+    "pathParameters": [
+      "campaign_id"
+    ],
+    "queryParameters": [
+      "ad_group_ids",
+      "ad_status",
+      "limit",
+      "listing_ids",
+      "offset"
+    ],
+    "requiredQuery": [],
+    "scope": "sell.marketing.readonly",
+    "token": "user",
+    "description": "This method retrieves Promoted Listings ads that are associated with listings created with either the Trading API or the Inventory API . The method retrieves ads related to the specified campaign. Specify the Promoted Listings campaign to target with the campaign_id path parameter. Because of the large number of possible results, you can use query parameters to paginate the result set by specifying a limit , which dictates how many ads to return on each page of the response. You can also specify how many ads to skip in the result set before returning the first result using the offset path parameter. Call getCampaigns to retrieve the current campaign IDs for the seller.",
+    "source": "src/types/sell-apps/marketing-and-promotions/sellMarketingV1Oas3.ts"
+  },
+  {
+    "id": "marketing.getAd",
+    "family": "marketing",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/marketing/v1/ad_campaign/{campaign_id}/ad/{ad_id}",
+    "pathParameters": [
+      "campaign_id",
+      "ad_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.marketing.readonly",
+    "token": "user",
+    "description": "This method retrieves the specified ad from the specified campaign. In the request, supply the campaign_id and ad_id as path parameters. Call getCampaigns to retrieve a list of the seller's current campaign IDs and call getAds to retrieve their current ad IDs.",
+    "source": "src/types/sell-apps/marketing-and-promotions/sellMarketingV1Oas3.ts"
+  },
+  {
+    "id": "marketing.getAdsByInventoryReference",
+    "family": "marketing",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/marketing/v1/ad_campaign/{campaign_id}/get_ads_by_inventory_reference",
+    "pathParameters": [
+      "campaign_id"
+    ],
+    "queryParameters": [
+      "inventory_reference_id",
+      "inventory_reference_type"
+    ],
+    "requiredQuery": [
+      "inventory_reference_id",
+      "inventory_reference_type"
+    ],
+    "scope": "sell.marketing.readonly",
+    "token": "user",
+    "description": "This method retrieves Promoted Listings ads associated with listings that are managed with the Inventory API from the specified campaign. Supply the campaign_id as a path parameter and use query parameters to specify the inventory_reference_id and inventory_reference_type pairs. In the Inventory API, an inventory reference ID is either a seller-defined SKU value or an inventoryItemGroupKey (a seller-defined ID for an inventory item group, which is an entity that's used in the Inventory API to create a multiple-variation listing). To indicate a listing managed by the Inventory API, you must always specify both an inventory_reference_id and the associated inventory_reference_type . Call getCampaigns to retrieve all of the seller's the current campaign IDs. Note: This method only applies to the Cost Per Sale (CPS) funding model; it does not apply to the Cost Per Click (CPC) funding model. See Funding Models in the Promoted Listings Playboo",
+    "source": "src/types/sell-apps/marketing-and-promotions/sellMarketingV1Oas3.ts"
+  },
+  {
+    "id": "marketing.getAdGroups",
+    "family": "marketing",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/marketing/v1/ad_campaign/{campaign_id}/ad_group",
+    "pathParameters": [
+      "campaign_id"
+    ],
+    "queryParameters": [
+      "ad_group_status",
+      "limit",
+      "offset"
+    ],
+    "requiredQuery": [],
+    "scope": "sell.marketing.readonly",
+    "token": "user",
+    "description": "This method retrieves ad groups for the specified campaigns. Each campaign can only have one ad group. In the request, supply the campaign_ids as path parameters. Call getCampaigns to retrieve a list of the current campaign IDs for a seller.",
+    "source": "src/types/sell-apps/marketing-and-promotions/sellMarketingV1Oas3.ts"
+  },
+  {
+    "id": "marketing.getAdGroup",
+    "family": "marketing",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/marketing/v1/ad_campaign/{campaign_id}/ad_group/{ad_group_id}",
+    "pathParameters": [
+      "campaign_id",
+      "ad_group_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.marketing.readonly",
+    "token": "user",
+    "description": "This method retrieves the details of a specified ad group, such as the ad group’s default bid and status. In the request, specify the campaign_id and ad_group_id as path parameters. Call getCampaigns to retrieve a list of the current campaign IDs for a seller and call getAdGroups for the ad group ID of the ad group you wish to retrieve.",
+    "source": "src/types/sell-apps/marketing-and-promotions/sellMarketingV1Oas3.ts"
+  },
+  {
+    "id": "marketing.getCampaigns",
+    "family": "marketing",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/marketing/v1/ad_campaign",
+    "pathParameters": [],
+    "queryParameters": [
+      "campaign_name",
+      "campaign_status",
+      "campaign_targeting_types",
+      "channels",
+      "end_date_range",
+      "funding_strategy",
+      "limit",
+      "offset",
+      "start_date_range"
+    ],
+    "requiredQuery": [],
+    "scope": "sell.marketing.readonly",
+    "token": "user",
+    "description": "This method retrieves the details for all of the seller's defined campaigns. Request parameters can be used to retrieve a specific campaign, such as the campaign's name, the start and end date, the channel, the status, and the funding model (i.e., Cost Per Sale (CPS) or Cost Per Click (CPC)). You can filter the result set by a campaign name, end date range, start date range, campaign channel, or campaign status. You can also paginate the records returned from the result set using the limit query parameter, and control which records to return using the offset parameter.",
+    "source": "src/types/sell-apps/marketing-and-promotions/sellMarketingV1Oas3.ts"
+  },
+  {
+    "id": "marketing.getCampaign",
+    "family": "marketing",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/marketing/v1/ad_campaign/{campaign_id}",
+    "pathParameters": [
+      "campaign_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.marketing.readonly",
+    "token": "user",
+    "description": "This method retrieves the details of a single campaign, as specified with the campaign_id query parameter. This method returns all the details of a campaign (including the campaign's the selection rules), except the for the listing IDs or inventory reference IDs included in the campaign. These IDs are returned by getAds . Call getCampaigns to retrieve a list of the seller's campaign IDs.",
+    "source": "src/types/sell-apps/marketing-and-promotions/sellMarketingV1Oas3.ts"
+  },
+  {
+    "id": "marketing.findCampaignByAdReference",
+    "family": "marketing",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/marketing/v1/ad_campaign/find_campaign_by_ad_reference",
+    "pathParameters": [],
+    "queryParameters": [
+      "inventory_reference_id",
+      "inventory_reference_type",
+      "listing_id"
+    ],
+    "requiredQuery": [],
+    "scope": "sell.marketing.readonly",
+    "token": "user",
+    "description": "This method retrieves the campaigns containing the listing that is specified using either a listing ID, or an inventory reference ID and inventory reference type pair. The request accepts either a listing_id , or an inventory_reference_id and inventory_reference_type pair, as used in the Inventory API. eBay listing IDs are generated by either the Trading API or the Inventory API when you create a listing. An inventory reference ID can be either a seller-defined SKU or inventoryItemGroupKey , as specified in the Inventory API. Note: This method only applies to the Cost Per Sale (CPS) funding model; it does not apply to the Cost Per Click (CPC) funding model. See Funding Models in the Promoted Listings Playbook for more information.",
+    "source": "src/types/sell-apps/marketing-and-promotions/sellMarketingV1Oas3.ts"
+  },
+  {
+    "id": "marketing.getCampaignByName",
+    "family": "marketing",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/marketing/v1/ad_campaign/get_campaign_by_name",
+    "pathParameters": [],
+    "queryParameters": [
+      "campaign_name"
+    ],
+    "requiredQuery": [
+      "campaign_name"
+    ],
+    "scope": "sell.marketing.readonly",
+    "token": "user",
+    "description": "This method retrieves the details of a single campaign, as specified with the campaign_name query parameter. Note that the campaign name you specify must be an exact, case-sensitive match of the name of the campaign you want to retrieve. Call getCampaigns to retrieve a list of the seller's campaign names.",
+    "source": "src/types/sell-apps/marketing-and-promotions/sellMarketingV1Oas3.ts"
+  },
+  {
+    "id": "marketing.suggestBudget",
+    "family": "marketing",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/marketing/v1/ad_campaign/suggest_budget",
+    "pathParameters": [],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.marketing",
+    "token": "user",
+    "description": "Note: This method is only supported for Promoted Offsite campaigns. Sellers can use the getAdvertisingEligibility method of the Account API v1 to determine if they are eligible for offsite campaigns. This method allows sellers to retrieve the suggested budget for an offsite campaign.",
+    "source": "src/types/sell-apps/marketing-and-promotions/sellMarketingV1Oas3.ts"
+  },
+  {
+    "id": "marketing.suggestItems",
+    "family": "marketing",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/marketing/v1/ad_campaign/{campaign_id}/suggest_items",
+    "pathParameters": [
+      "campaign_id"
+    ],
+    "queryParameters": [
+      "category_ids",
+      "limit",
+      "offset"
+    ],
+    "requiredQuery": [],
+    "scope": "sell.marketing",
+    "token": "user",
+    "description": "This method allows sellers to obtain ideas for listings, which can be targeted for Promoted Listings campaigns.",
+    "source": "src/types/sell-apps/marketing-and-promotions/sellMarketingV1Oas3.ts"
+  },
+  {
+    "id": "marketing.getKeywords",
+    "family": "marketing",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/marketing/v1/ad_campaign/{campaign_id}/keyword",
+    "pathParameters": [
+      "campaign_id"
+    ],
+    "queryParameters": [
+      "ad_group_ids",
+      "keyword_status",
+      "limit",
+      "offset"
+    ],
+    "requiredQuery": [],
+    "scope": "sell.marketing.readonly",
+    "token": "user",
+    "description": "This method can be used to retrieve all of the keywords for ad groups in priority strategy campaigns that use the Cost Per Click (CPC) funding model. In the request, specify the campaign_id as a path parameter. If one or more ad_group_ids are passed in the request body, the keywords for those ad groups will be returned. If ad_group_ids are not passed in the response body, the call will return all the keywords in the campaign. Call the getCampaigns method to retrieve a list of current campaign IDs for a seller.",
+    "source": "src/types/sell-apps/marketing-and-promotions/sellMarketingV1Oas3.ts"
+  },
+  {
+    "id": "marketing.getKeyword",
+    "family": "marketing",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/marketing/v1/ad_campaign/{campaign_id}/keyword/{keyword_id}",
+    "pathParameters": [
+      "campaign_id",
+      "keyword_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.marketing.readonly",
+    "token": "user",
+    "description": "This method retrieves details on a specific keyword from an ad group within a priority strategy campaign that uses the Cost Per Click (CPC) funding model. In the request, specify the campaign_id and keyword_id as path parameters. Call the getCampaigns method to retrieve a list of current campaign IDs for a seller and call the getKeywords method to retrieve their keyword IDs.",
+    "source": "src/types/sell-apps/marketing-and-promotions/sellMarketingV1Oas3.ts"
+  },
+  {
+    "id": "marketing.getNegativeKeywords",
+    "family": "marketing",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/marketing/v1/negative_keyword",
+    "pathParameters": [],
+    "queryParameters": [
+      "ad_group_ids",
+      "campaign_ids",
+      "limit",
+      "negative_keyword_status",
+      "offset"
+    ],
+    "requiredQuery": [],
+    "scope": "sell.marketing.readonly",
+    "token": "user",
+    "description": "This method can be used to retrieve all of the negative keywords for ad groups in priority strategy campaigns that use the Cost Per Click (CPC) funding model. The results can be filtered using the campaign_ids , ad_group_ids , and negative_keyword_status query parameters. Call the getCampaigns method to retrieve a list of current campaign IDs for a seller.",
+    "source": "src/types/sell-apps/marketing-and-promotions/sellMarketingV1Oas3.ts"
+  },
+  {
+    "id": "marketing.getNegativeKeyword",
+    "family": "marketing",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/marketing/v1/negative_keyword/{negative_keyword_id}",
+    "pathParameters": [
+      "negative_keyword_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.marketing.readonly",
+    "token": "user",
+    "description": "This method retrieves details on a specific negative keyword. In the request, specify the negative_keyword_id as a path parameter.",
+    "source": "src/types/sell-apps/marketing-and-promotions/sellMarketingV1Oas3.ts"
+  },
+  {
+    "id": "marketing.getReport",
+    "family": "marketing",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/marketing/v1/ad_report/{report_id}",
+    "pathParameters": [
+      "report_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.marketing.readonly",
+    "token": "user",
+    "description": "This call downloads the report as specified by the report_id path parameter. Call createReportTask to schedule and generate a Promoted Listings report. All date values are returned in UTC format ( yyyy-MM-ddThh:mm:ss.sssZ ). Note: The reporting of some data related to sales and ad-fees may require a 72-hour ( maximum ) adjustment period which is often referred to as the Reconciliation Period . Such adjustment periods should, on average, be minimal. However, at any given time, the payments tab may be used to view those amounts that have actually been charged. Important! For ad_report and ad_report_task methods, the API call limit is subject to a per user quota. These API calls can only be executed a maximum of 200 times per hour for each seller/user. If the number of calls per hour exceeds this limit, any new calls will be blocked for the next hour.",
+    "source": "src/types/sell-apps/marketing-and-promotions/sellMarketingV1Oas3.ts"
+  },
+  {
+    "id": "marketing.getReportMetadata",
+    "family": "marketing",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/marketing/v1/ad_report_metadata",
+    "pathParameters": [],
+    "queryParameters": [
+      "funding_model",
+      "channel"
+    ],
+    "requiredQuery": [],
+    "scope": "sell.marketing.readonly",
+    "token": "user",
+    "description": "This call retrieves information that details the fields used in each of the Promoted Listings reports. Use the returned information to configure the different types of Promoted Listings reports. You can retrieve metadata for all report types,funding models and channels, or you can filter based on funding model and/or channel. Note: The reporting of some data related to sales and ad-fees may require a 72-hour ( maximum ) adjustment period which is often referred to as the Reconciliation Period . Such adjustment periods should, on average, be minimal. However, at any given time, the payments tab may be used to view those amounts that have actually been charged.",
+    "source": "src/types/sell-apps/marketing-and-promotions/sellMarketingV1Oas3.ts"
+  },
+  {
+    "id": "marketing.getReportMetadataForReportType",
+    "family": "marketing",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/marketing/v1/ad_report_metadata/{report_type}",
+    "pathParameters": [
+      "report_type"
+    ],
+    "queryParameters": [
+      "funding_model",
+      "channel"
+    ],
+    "requiredQuery": [],
+    "scope": "sell.marketing.readonly",
+    "token": "user",
+    "description": "This call retrieves metadata that details the fields used by a specific Promoted Listings report type. Use the report_type path parameter to indicate metadata to retrieve. This method does not use a request payload. Note: The reporting of some data related to sales and ad-fees may require a 72-hour ( maximum ) adjustment period which is often referred to as the Reconciliation Period . Such adjustment periods should, on average, be minimal. However, at any given time, the payments tab may be used to view those amounts that have actually been charged.",
+    "source": "src/types/sell-apps/marketing-and-promotions/sellMarketingV1Oas3.ts"
+  },
+  {
+    "id": "marketing.getReportTasks",
+    "family": "marketing",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/marketing/v1/ad_report_task",
+    "pathParameters": [],
+    "queryParameters": [
+      "limit",
+      "offset",
+      "report_task_statuses"
+    ],
+    "requiredQuery": [],
+    "scope": "sell.marketing.readonly",
+    "token": "user",
+    "description": "This method returns information on all the existing report tasks related to a seller. Use the report_task_statuses query parameter to control which reports to return. You can paginate the result set by specifying a limit , which dictates how many report tasks to return on each page of the response. Use the offset parameter to specify how many reports to skip in the result set before returning the first result. Important! For ad_report and ad_report_task methods, the API call limit is subject to a per user quota. These API calls can only be executed a maximum of 200 times per hour for each seller/user. If the number of calls per hour exceeds this limit, any new calls will be blocked for the next hour.",
+    "source": "src/types/sell-apps/marketing-and-promotions/sellMarketingV1Oas3.ts"
+  },
+  {
+    "id": "marketing.getReportTask",
+    "family": "marketing",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/marketing/v1/ad_report_task/{report_task_id}",
+    "pathParameters": [
+      "report_task_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.marketing.readonly",
+    "token": "user",
+    "description": "This call returns the details of a specific Promoted Listings report task, as specified by the report_task_id path parameter. The report task includes the report criteria (such as the report dimensions, metrics, and included listing) and the report-generation rules (such as starting and ending dates for the specified report task). Report-task IDs are generated by eBay when you call createReportTask . Get a complete list of a seller's report-task IDs by calling getReportTasks . Important! For ad_report and ad_report_task methods, the API call limit is subject to a per user quota. These API calls can only be executed a maximum of 200 times per hour for each seller/user. If the number of calls per hour exceeds this limit, any new calls will be blocked for the next hour.",
+    "source": "src/types/sell-apps/marketing-and-promotions/sellMarketingV1Oas3.ts"
+  },
+  {
+    "id": "marketing.getItemPriceMarkdownPromotion",
+    "family": "marketing",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/marketing/v1/item_price_markdown/{promotion_id}",
+    "pathParameters": [
+      "promotion_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.marketing.readonly",
+    "token": "user",
+    "description": "Note: As of July 8th 2024, promotions are now being referred to as discounts on Seller Hub and eBay help pages. Sell Marketing API documentation has been updated to reflect this product name change, but note that no API interface changes have been made. This method returns the complete details of the item price markdown discount that's indicated by the promotion_id path parameter. Call getPromotions to retrieve the IDs of a seller's discounts.",
+    "source": "src/types/sell-apps/marketing-and-promotions/sellMarketingV1Oas3.ts"
+  },
+  {
+    "id": "marketing.getItemPromotion",
+    "family": "marketing",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/marketing/v1/item_promotion/{promotion_id}",
+    "pathParameters": [
+      "promotion_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.marketing.readonly",
+    "token": "user",
+    "description": "Note: As of July 8th 2024, promotions are now being referred to as discounts on Seller Hub and eBay help pages. Sell Marketing API documentation has been updated to reflect this product name change, but note that no API interface changes have been made. This method returns the complete details of the threshold discount specified by the promotion_id path parameter. Call getPromotions to retrieve the IDs of a seller's discounts.",
+    "source": "src/types/sell-apps/marketing-and-promotions/sellMarketingV1Oas3.ts"
+  },
+  {
+    "id": "marketing.getListingSet",
+    "family": "marketing",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/marketing/v1/promotion/{promotion_id}/get_listing_set",
+    "pathParameters": [
+      "promotion_id"
+    ],
+    "queryParameters": [
+      "limit",
+      "offset",
+      "q",
+      "sort",
+      "status"
+    ],
+    "requiredQuery": [],
+    "scope": "sell.marketing.readonly",
+    "token": "user",
+    "description": "Note: As of July 8th 2024, promotions are now being referred to as discounts on Seller Hub and eBay help pages. Sell Marketing API documentation has been updated to reflect this product name change, but note that no API interface changes have been made. This method returns the set of listings associated with the promotion_id specified in the path parameter. Call getPromotions to retrieve the IDs of a seller's discounts. The listing details are returned in a paginated set and you can control and results returned using the following query parameters: limit , offset , q , sort , and status . Maximum associated listings returned: 200 Default number of listings returned: 200",
+    "source": "src/types/sell-apps/marketing-and-promotions/sellMarketingV1Oas3.ts"
+  },
+  {
+    "id": "marketing.getPromotions",
+    "family": "marketing",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/marketing/v1/promotion",
+    "pathParameters": [],
+    "queryParameters": [
+      "limit",
+      "marketplace_id",
+      "offset",
+      "promotion_status",
+      "promotion_type",
+      "q",
+      "sort"
+    ],
+    "requiredQuery": [
+      "marketplace_id"
+    ],
+    "scope": "sell.marketing.readonly",
+    "token": "user",
+    "description": "Note: As of July 8th 2024, promotions are now being referred to as discounts on Seller Hub and eBay help pages. Sell Marketing API documentation has been updated to reflect this product name change, but note that no API interface changes have been made. This method returns a list of a seller's undeleted discounts. The call returns up to 200 currently-available discounts on the specified marketplace. While the response body does not include the discount's discountRules or inventoryCriterion containers, it does include the promotionHref (which you can use to retrieve the complete details of the discount). Use query parameters to sort and filter the results by the number of discounts to return, the discount state or type, and the eBay marketplace. You can also supply keywords to limit the response to the discounts that contain that keywords in the title of the discount. Maximum returned: 200",
+    "source": "src/types/sell-apps/marketing-and-promotions/sellMarketingV1Oas3.ts"
+  },
+  {
+    "id": "marketing.getPromotionReports",
+    "family": "marketing",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/marketing/v1/promotion_report",
+    "pathParameters": [],
+    "queryParameters": [
+      "limit",
+      "marketplace_id",
+      "offset",
+      "promotion_status",
+      "promotion_type",
+      "q"
+    ],
+    "requiredQuery": [
+      "marketplace_id"
+    ],
+    "scope": "sell.marketing.readonly",
+    "token": "user",
+    "description": "Note: As of July 8th 2024, promotions are now being referred to as discounts on Seller Hub and eBay help pages. Sell Marketing API documentation has been updated to reflect this product name change, but note that no API interface changes have been made. This method generates a report that lists the seller's running, paused, and ended discounts for the specified eBay marketplace. The result set can be filtered by the discount status and the number of results to return. You can also supply keywords to limit the report to discounts that contain the specified keywords. Specify the eBay marketplace for which you want the report run using the marketplace_id query parameter. Supply additional query parameters to control the report as needed.",
+    "source": "src/types/sell-apps/marketing-and-promotions/sellMarketingV1Oas3.ts"
+  },
+  {
+    "id": "marketing.getPromotionSummaryReport",
+    "family": "marketing",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/marketing/v1/promotion_summary_report",
+    "pathParameters": [],
+    "queryParameters": [
+      "marketplace_id"
+    ],
+    "requiredQuery": [
+      "marketplace_id"
+    ],
+    "scope": "sell.marketing.readonly",
+    "token": "user",
+    "description": "Note: As of July 8th 2024, promotions are now being referred to as discounts on Seller Hub and eBay help pages. Sell Marketing API documentation has been updated to reflect this product name change, but note that no API interface changes have been made. This method generates a report that summarizes the seller's discounts for the specified eBay marketplace. The report returns information on RUNNING , PAUSED , and ENDED discounts (deleted reports are not returned) and summarizes the seller's campaign performance for all discounts on a given site. For information about summary reports, see Reading the item discount Summary report .",
+    "source": "src/types/sell-apps/marketing-and-promotions/sellMarketingV1Oas3.ts"
+  },
+  {
+    "id": "marketing.getEmailCampaigns",
+    "family": "marketing",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/marketing/v1/email_campaign",
+    "pathParameters": [],
+    "queryParameters": [
+      "limit",
+      "offset",
+      "q",
+      "sort"
+    ],
+    "requiredQuery": [],
+    "scope": "sell.marketing.readonly",
+    "token": "user",
+    "description": "This method retrieves a list of email campaigns from a seller's eBay store. Users can filter the results by email campaign type , email campaign status , and marketplace ID using the q query parameter.",
+    "source": "src/types/sell-apps/marketing-and-promotions/sellMarketingV1Oas3.ts"
+  },
+  {
+    "id": "marketing.getEmailCampaign",
+    "family": "marketing",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/marketing/v1/email_campaign/{email_campaign_id}",
+    "pathParameters": [
+      "email_campaign_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.marketing.readonly",
+    "token": "user",
+    "description": "This method returns the details of a single email campaign specified by the email_campaign_id path parameter. Call getEmailCampaigns to retrieve a list of all email campaigns from a seller's eBay store.",
+    "source": "src/types/sell-apps/marketing-and-promotions/sellMarketingV1Oas3.ts"
+  },
+  {
+    "id": "marketing.getAudiences",
+    "family": "marketing",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/marketing/v1/email_campaign/audience",
+    "pathParameters": [],
+    "queryParameters": [
+      "emailCampaignType",
+      "limit",
+      "offset"
+    ],
+    "requiredQuery": [
+      "emailCampaignType"
+    ],
+    "scope": "sell.marketing.readonly",
+    "token": "user",
+    "description": "This method retrieves all available email newsletter audiences for the email campaign type specified by the emailCampaignType path parameter. Use the optional limit and offset path parameters to paginate the results and to control which records are returned, respectively.",
+    "source": "src/types/sell-apps/marketing-and-promotions/sellMarketingV1Oas3.ts"
+  },
+  {
+    "id": "marketing.getEmailPreview",
+    "family": "marketing",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/marketing/v1/email_campaign/{email_campaign_id}/email_preview",
+    "pathParameters": [
+      "email_campaign_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.marketing.readonly",
+    "token": "user",
+    "description": "This method returns a preview of the email sent by the email campaign indicated by the email_campaign_id path parameter. Call getEmailCampaigns to obtain a list of email campaigns. Use the emailCampaignId value of the desired email campaign as the email_campaign_id path parameter value. If this call is executed successfully, the response returns a content field that contains the raw HTML code of the email campaign that can then be rendered anywhere. Note: The eBay listings in the email are sorted according to the email campaign sort criteria. The individual listings can change over time, as well. The result of the email preview call can be treated as a snapshot of the email campaign taken at the date and time of the renderDate value found in the results of the call.",
+    "source": "src/types/sell-apps/marketing-and-promotions/sellMarketingV1Oas3.ts"
+  },
+  {
+    "id": "marketing.getEmailReport",
+    "family": "marketing",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/marketing/v1/email_campaign/report",
+    "pathParameters": [],
+    "queryParameters": [
+      "endDate",
+      "startDate"
+    ],
+    "requiredQuery": [
+      "endDate",
+      "startDate"
+    ],
+    "scope": "sell.marketing.readonly",
+    "token": "user",
+    "description": "This method returns the seller's email campaign performance report for a time period specified by the startDate and endDate path parameters. The maximum date range for a report retrieved by this method is one year. Note: The startDate and endDate must be given in UTC format, as shown in the following example: sell/marketing/v1/email_campaign/report?startDate=2022-11-01T19:09:02.768Z&endDate=2022-12-28T19:09:02.768Z The email report returns a list of metrics, such as the number of times an email report has been opened and resulted in clicks.",
+    "source": "src/types/sell-apps/marketing-and-promotions/sellMarketingV1Oas3.ts"
+  },
+  {
+    "id": "account_v2.getRateTable",
+    "family": "account_v2",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/account/v2/rate_table/{rate_table_id}",
+    "pathParameters": [
+      "rate_table_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.account.readonly",
+    "token": "user",
+    "description": "parameters: { query?: never; header?: never; path?: never; cookie?: never; }; /** * Retrieves details of a specific shipping rate table. * @description This method retrieves an existing rate table identified by the rate_table_id path parameter. Shipping rate tables are currently supported by the following marketplaces: United States, Canada, United Kingdom, Germany, Australia, France, Italy, and Spain. A successful call returns detailed information for the specified shipping rate table.",
+    "source": "src/types/sell-apps/account-management/sellAccountV2Oas3.ts"
+  },
+  {
+    "id": "account_v2.getPayoutSettings",
+    "family": "account_v2",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/account/v2/payout_settings",
+    "pathParameters": [],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.finances",
+    "token": "user",
+    "description": "parameters: { query?: never; header?: never; path?: never; cookie?: never; }; /** * Retrieves payout percentages and unique IDs for accounts configured to receive seller payouts. * @description Important! Split-payout functionality is only available to mainland China sellers, who can split payouts between their Payoneer account and bank account. Card payouts are not currently available for sellers in mainland China. This method returns details on two payment instruments defined on a seller's account, including the ID, type, status, nickname, last four digits of the account number, and payout percentage for the instruments. Using the instrumentId returned with this method, sellers can makes changes to the payout split of the instruments with the updatePayoutPercentage method. Note that the instrumentStatus of a payment instrument, also returned using this method, must be ACTIVE in order to do split payouts on that payment instrument.",
+    "source": "src/types/sell-apps/account-management/sellAccountV2Oas3.ts"
+  },
+  {
+    "id": "account_v2.getCombinedShippingRules",
+    "family": "account_v2",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/account/v2/combined_shipping_rules",
+    "pathParameters": [],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.account.readonly",
+    "token": "user",
+    "description": "parameters: { query?: never; header?: never; path?: never; cookie?: never; }; /** * Retrieves all combined shipping rule configurations defined for the seller. * @description This method retrieves all existing combined shipping rule configurations defined by the authenticated seller, including calculated, flat, and promotional types.",
+    "source": "src/types/sell-apps/account-management/sellAccountV2Oas3.ts"
+  },
+  {
+    "id": "account_v2.getUserPreferences",
+    "family": "account_v2",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/account/v2/user_preferences",
+    "pathParameters": [],
+    "queryParameters": [
+      "fieldgroups"
+    ],
+    "requiredQuery": [],
+    "scope": "sell.account.readonly",
+    "token": "user",
+    "description": "parameters: { query?: never; header?: never; path?: never; cookie?: never; }; /** * Retrieves the seller's preferences for a specific eBay marketplace. * @description This method retrieves the seller's preferences for a specific eBay marketplace, such as combined payment preferences, same-day shipping cutoff time, excluded shipping locations, and opt-in status for Business Policies and Out-of-Stock control. The fieldgroups query parameter specifies the type of seller preferences to retrieve. If fieldgroups = ALL or the parameter is omitted, all the supported seller preferences are returned. To retrieve only specific preferences, include the fieldgroups parameter with one or more supported values, delimited by commas.",
+    "source": "src/types/sell-apps/account-management/sellAccountV2Oas3.ts"
+  },
+  {
+    "id": "finances.getOrderEarnings",
+    "family": "finances",
+    "method": "GET",
+    "host": "apiz",
+    "path": "/sell/finances/v1/order_earnings",
+    "pathParameters": [],
+    "queryParameters": [
+      "filter",
+      "limit",
+      "offset",
+      "sort"
+    ],
+    "requiredQuery": [],
+    "scope": "sell.finances.earnings.read",
+    "token": "user",
+    "description": "This method returns detailed order-level financial data for each order associated with a seller account. The returned order-level financial data includes order earnings, gross amount, expenses, and refunds. Order earnings includes earnings after deducting expenses and refunds from the gross amount. Note: Expenses include fees, shipping labels, and donations. Refunds include gross refunds, gross claims, and gross payment disputes. The financial data for orders will be returned as filtered based on the order's creation date. Note: Only charges and credits tied to the order are shown, and they appear in near real time for orders created within the selected order creation time window. Pagination is supported through the limit and offset parameters. These parameters can be used to control the number of records returned in a single response and to retrieve subsequent pages of results when the result set spans multiple pages. The response can ",
+    "source": "src/types/sell-apps/account-management/sellFinancesV1Oas3.ts"
+  },
+  {
+    "id": "finances.getOrderEarningsById",
+    "family": "finances",
+    "method": "GET",
+    "host": "apiz",
+    "path": "/sell/finances/v1/order_earnings/{order_id}",
+    "pathParameters": [
+      "order_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.finances.earnings.read",
+    "token": "user",
+    "description": "This method returns detailed order-level financial data including order earnings, gross amount, expenses, and refunds. Order earnings includes earnings after deducting expenses and refunds from the gross amount. Note: Expenses include fees, shipping labels, and donations. Refunds include gross refunds, gross claims, and gross payment disputes. Note: Only charges and credits tied to the order are shown, and they appear in near real time for orders created within the selected order creation time window. The response returns earnings information only for the order identified by the order_id path parameter. Note: Access to the order_earnings resource is currently limited to only US, China, or Hong Kong sellers who meet the following criteria and also request access: - US sellers with the country of residence set to US and having a payout currency in USD . - Hong Kong or China sellers having the country of residence set to HK or CN and the p",
+    "source": "src/types/sell-apps/account-management/sellFinancesV1Oas3.ts"
+  },
+  {
+    "id": "finances.getOrderEarningsSummary",
+    "family": "finances",
+    "method": "GET",
+    "host": "apiz",
+    "path": "/sell/finances/v1/order_earnings_summary",
+    "pathParameters": [],
+    "queryParameters": [
+      "filter"
+    ],
+    "requiredQuery": [],
+    "scope": "sell.finances.earnings.read",
+    "token": "user",
+    "description": "This method returns a summarized view of order earnings information for one or more orders associated with a seller account. The method retrieves aggregated data for order earnings after deducting expenses and refunds from the gross amount. You can use this method for high-level financial reporting workflows. Note: Expenses include fees, shipping labels, and donations. Refunds include gross refunds, gross claims, and gross payment disputes. Note: Only charges and credits tied to the order are shown, and they appear in near real time for orders created within the selected order creation time window. The response can be filtered by using the filter parameter. This parameter allows consumers to restrict the summary results returned by the method based on supported filtering criteria. Note: Access to the order_earnings resource is currently limited to only US, China, or Hong Kong sellers who meet the following criteria and also request acce",
+    "source": "src/types/sell-apps/account-management/sellFinancesV1Oas3.ts"
+  },
+  {
+    "id": "finances.getPayout",
+    "family": "finances",
+    "method": "GET",
+    "host": "apiz",
+    "path": "/sell/finances/v1/payout/{payout_Id}",
+    "pathParameters": [
+      "payout_Id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.finances",
+    "token": "user",
+    "description": "Important! Due to EU & UK Payments regulatory requirements, an additional security verification via Digital Signatures is required for certain API calls that are made on behalf of EU/UK sellers, including all Finances API methods. Please refer to Digital Signatures for APIs to learn more on the impacted APIs and the process to create signatures to be included in the HTTP payload. Note: The Finances API does not support Team Access . Financial information, such as payouts or transactions, is only returned for the user that makes the call. You cannot use any of the methods in this API to return financial information for another user. This method retrieves details on a specific seller payout. The unique identifier of the payout is passed in as a path parameter at the end of the call URI. The getPayouts method can be used to retrieve the unique identifier of a payout, or the user can check Seller Hub. For split-payout cases, which are only ",
+    "source": "src/types/sell-apps/account-management/sellFinancesV1Oas3.ts"
+  },
+  {
+    "id": "finances.getPayouts",
+    "family": "finances",
+    "method": "GET",
+    "host": "apiz",
+    "path": "/sell/finances/v1/payout",
+    "pathParameters": [],
+    "queryParameters": [
+      "filter",
+      "limit",
+      "offset",
+      "sort"
+    ],
+    "requiredQuery": [],
+    "scope": "sell.finances",
+    "token": "user",
+    "description": "Important! Due to EU & UK Payments regulatory requirements, an additional security verification via Digital Signatures is required for certain API calls that are made on behalf of EU/UK sellers, including all Finances API methods. Please refer to Digital Signatures for APIs to learn more on the impacted APIs and the process to create signatures to be included in the HTTP payload. Note: The Finances API does not support Team Access . Financial information, such as payouts or transactions, is only returned for the user that makes the call. You cannot use any of the methods in this API to return financial information for another user. This method is used to retrieve the details of one or more seller payouts. By using the filter query parameter, users can retrieve payouts processed within a specific date range, and/or they can retrieve payouts in a specific state. There are also pagination and sort query parameters that allow users to contr",
+    "source": "src/types/sell-apps/account-management/sellFinancesV1Oas3.ts"
+  },
+  {
+    "id": "finances.getPayoutSummary",
+    "family": "finances",
+    "method": "GET",
+    "host": "apiz",
+    "path": "/sell/finances/v1/payout_summary",
+    "pathParameters": [],
+    "queryParameters": [
+      "filter"
+    ],
+    "requiredQuery": [],
+    "scope": "sell.finances",
+    "token": "user",
+    "description": "Important! Due to EU & UK Payments regulatory requirements, an additional security verification via Digital Signatures is required for certain API calls that are made on behalf of EU/UK sellers, including all Finances API methods. Please refer to Digital Signatures for APIs to learn more on the impacted APIs and the process to create signatures to be included in the HTTP payload. Note: The Finances API does not support Team Access . Financial information, such as payouts or transactions, is only returned for the user that makes the call. You cannot use any of the methods in this API to return financial information for another user. This method is used to retrieve cumulative values for payouts in a particular state, or all states. The metadata in the response includes total payouts, the total number of monetary transactions (sales, refunds, credits) associated with those payouts, and the total dollar value of all payouts. If the filter q",
+    "source": "src/types/sell-apps/account-management/sellFinancesV1Oas3.ts"
+  },
+  {
+    "id": "finances.getSellerFundsSummary",
+    "family": "finances",
+    "method": "GET",
+    "host": "apiz",
+    "path": "/sell/finances/v1/seller_funds_summary",
+    "pathParameters": [],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.finances",
+    "token": "user",
+    "description": "Important! Due to EU & UK Payments regulatory requirements, an additional security verification via Digital Signatures is required for certain API calls that are made on behalf of EU/UK sellers, including all Finances API methods. Please refer to Digital Signatures for APIs to learn more on the impacted APIs and the process to create signatures to be included in the HTTP payload. Note: The Finances API does not support Team Access . Financial information, such as payouts or transactions, is only returned for the user that makes the call. You cannot use any of the methods in this API to return financial information for another user. This method retrieves all pending funds that have not yet been distributed through a seller payout. There are no input parameters for this method. The response payload includes available funds, funds being processed, funds on hold, and also an aggregate count of all three of these categories. If there are no ",
+    "source": "src/types/sell-apps/account-management/sellFinancesV1Oas3.ts"
+  },
+  {
+    "id": "finances.getTransactions",
+    "family": "finances",
+    "method": "GET",
+    "host": "apiz",
+    "path": "/sell/finances/v1/transaction",
+    "pathParameters": [],
+    "queryParameters": [
+      "filter",
+      "limit",
+      "offset",
+      "sort"
+    ],
+    "requiredQuery": [],
+    "scope": "sell.finances",
+    "token": "user",
+    "description": "Important! Due to EU & UK Payments regulatory requirements, an additional security verification via Digital Signatures is required for certain API calls that are made on behalf of EU/UK sellers, including all Finances API methods. Please refer to Digital Signatures for APIs to learn more on the impacted APIs and the process to create signatures to be included in the HTTP payload. Note: The Finances API does not support Team Access . Financial information, such as payouts or transactions, is only returned for the user that makes the call. You cannot use any of the methods in this API to return financial information for another user. The getTransactions method allows a seller to retrieve information about one or more of their monetary transactions. Note: For a complete list of transaction types, refer to TransactionTypeEnum . Numerous input filters are available which can be used individually or combined to refine the data that are return",
+    "source": "src/types/sell-apps/account-management/sellFinancesV1Oas3.ts"
+  },
+  {
+    "id": "finances.getTransactionSummary",
+    "family": "finances",
+    "method": "GET",
+    "host": "apiz",
+    "path": "/sell/finances/v1/transaction_summary",
+    "pathParameters": [],
+    "queryParameters": [
+      "filter"
+    ],
+    "requiredQuery": [],
+    "scope": "sell.finances",
+    "token": "user",
+    "description": "Important! Due to EU & UK Payments regulatory requirements, an additional security verification via Digital Signatures is required for certain API calls that are made on behalf of EU/UK sellers, including all Finances API methods. Please refer to Digital Signatures for APIs to learn more on the impacted APIs and the process to create signatures to be included in the HTTP payload. Note: The Finances API does not support Team Access . Financial information, such as payouts or transactions, is only returned for the user that makes the call. You cannot use any of the methods in this API to return financial information for another user. The getTransactionSummary method retrieves cumulative information for monetary transactions. If applicable, the number of payments with a transactionStatus equal to FUNDS_ON_HOLD and the total monetary amount of these on-hold payments are also returned. Note: For a complete list of transaction types, refer to",
+    "source": "src/types/sell-apps/account-management/sellFinancesV1Oas3.ts"
+  },
+  {
+    "id": "finances.getTransfer",
+    "family": "finances",
+    "method": "GET",
+    "host": "apiz",
+    "path": "/sell/finances/v1/transfer/{transfer_Id}",
+    "pathParameters": [
+      "transfer_Id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.finances",
+    "token": "user",
+    "description": "Important! Due to EU & UK Payments regulatory requirements, an additional security verification via Digital Signatures is required for certain API calls that are made on behalf of EU/UK sellers, including all Finances API methods. Please refer to Digital Signatures for APIs to learn more on the impacted APIs and the process to create signatures to be included in the HTTP payload. Note: The Finances API does not support Team Access . Financial information, such as payouts or transactions, is only returned for the user that makes the call. You cannot use any of the methods in this API to return financial information for another user. This method retrieves detailed information regarding a TRANSFER transaction type. A TRANSFER is a monetary transaction type that involves a seller transferring money to eBay for reimbursement of one or more charges. For example, when a seller reimburses eBay for a buyer refund. If an ID is passed into the URI",
+    "source": "src/types/sell-apps/account-management/sellFinancesV1Oas3.ts"
+  },
+  {
+    "id": "finances.getBillingActivities",
+    "family": "finances",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/finances/v1/billing_activity",
+    "pathParameters": [],
+    "queryParameters": [
+      "filter",
+      "limit",
+      "offset",
+      "sort"
+    ],
+    "requiredQuery": [],
+    "scope": "sell.finances",
+    "token": "user",
+    "description": "Important! Due to EU & UK Payments regulatory requirements, an additional security verification via Digital Signatures is required for certain API calls that are made on behalf of EU/UK sellers, including all Finances API methods. Please refer to Digital Signatures for APIs to learn more on the impacted APIs and the process to create signatures to be included in the HTTP payload. Note: The Finances API does not support Team Access . Financial information, such as payouts or transactions, is only returned for the user that makes the call. You cannot use any of the methods in this API to return financial information for another user. This method retrieves filtered billing activities of the seller. Returned results are filtered through query parameters such as date range, activity ID, listing ID, or order ID. Sorting and pagination features help organize and navigate returned activities efficiently.",
+    "source": "src/types/sell-apps/account-management/sellFinancesV1Oas3.ts"
+  },
+  {
+    "id": "account.getCustomPolicies",
+    "family": "account",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/account/v1/custom_policy/",
+    "pathParameters": [],
+    "queryParameters": [
+      "policy_types"
+    ],
+    "requiredQuery": [],
+    "scope": "sell.account.readonly",
+    "token": "user",
+    "description": "This method retrieves the list of custom policies defined for a seller's account. To limit the returned custom policies, specify the policy_types query parameter.",
+    "source": "src/types/sell-apps/account-management/sellAccountV1Oas3.ts"
+  },
+  {
+    "id": "account.getCustomPolicy",
+    "family": "account",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/account/v1/custom_policy/{custom_policy_id}",
+    "pathParameters": [
+      "custom_policy_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.account.readonly",
+    "token": "user",
+    "description": "This method retrieves the custom policy specified by the custom_policy_id path parameter.",
+    "source": "src/types/sell-apps/account-management/sellAccountV1Oas3.ts"
+  },
+  {
+    "id": "account.getFulfillmentPolicy",
+    "family": "account",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/account/v1/fulfillment_policy/{fulfillmentPolicyId}",
+    "pathParameters": [
+      "fulfillmentPolicyId"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.account.readonly",
+    "token": "user",
+    "description": "This method retrieves the complete details of a fulfillment policy. Supply the ID of the policy you want to retrieve using the fulfillmentPolicyId path parameter.",
+    "source": "src/types/sell-apps/account-management/sellAccountV1Oas3.ts"
+  },
+  {
+    "id": "account.getFulfillmentPolicies",
+    "family": "account",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/account/v1/fulfillment_policy",
+    "pathParameters": [],
+    "queryParameters": [
+      "marketplace_id"
+    ],
+    "requiredQuery": [
+      "marketplace_id"
+    ],
+    "scope": "sell.account.readonly",
+    "token": "user",
+    "description": "This method retrieves all the fulfillment policies configured for the marketplace you specify using the marketplace_id query parameter.",
+    "source": "src/types/sell-apps/account-management/sellAccountV1Oas3.ts"
+  },
+  {
+    "id": "account.getFulfillmentPolicyByName",
+    "family": "account",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/account/v1/fulfillment_policy/get_by_policy_name",
+    "pathParameters": [],
+    "queryParameters": [
+      "marketplace_id",
+      "name"
+    ],
+    "requiredQuery": [
+      "marketplace_id",
+      "name"
+    ],
+    "scope": "sell.account.readonly",
+    "token": "user",
+    "description": "This method retrieves the details for a specific fulfillment policy. In the request, supply both the policy name and its associated marketplace_id as query parameters.",
+    "source": "src/types/sell-apps/account-management/sellAccountV1Oas3.ts"
+  },
+  {
+    "id": "account.getPaymentPolicies",
+    "family": "account",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/account/v1/payment_policy",
+    "pathParameters": [],
+    "queryParameters": [
+      "marketplace_id"
+    ],
+    "requiredQuery": [
+      "marketplace_id"
+    ],
+    "scope": "sell.account.readonly",
+    "token": "user",
+    "description": "This method retrieves all the payment business policies configured for the marketplace you specify using the marketplace_id query parameter.",
+    "source": "src/types/sell-apps/account-management/sellAccountV1Oas3.ts"
+  },
+  {
+    "id": "account.getPaymentPolicy",
+    "family": "account",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/account/v1/payment_policy/{payment_policy_id}",
+    "pathParameters": [
+      "payment_policy_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.account.readonly",
+    "token": "user",
+    "description": "This method retrieves the complete details of a payment policy. Supply the ID of the policy you want to retrieve using the paymentPolicyId path parameter.",
+    "source": "src/types/sell-apps/account-management/sellAccountV1Oas3.ts"
+  },
+  {
+    "id": "account.getPaymentPolicyByName",
+    "family": "account",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/account/v1/payment_policy/get_by_policy_name",
+    "pathParameters": [],
+    "queryParameters": [
+      "marketplace_id",
+      "name"
+    ],
+    "requiredQuery": [
+      "marketplace_id",
+      "name"
+    ],
+    "scope": "sell.account.readonly",
+    "token": "user",
+    "description": "This method retrieves the details of a specific payment policy. Supply both the policy name and its associated marketplace_id in the request query parameters.",
+    "source": "src/types/sell-apps/account-management/sellAccountV1Oas3.ts"
+  },
+  {
+    "id": "account.getPaymentsProgram",
+    "family": "account",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/account/v1/payments_program/{marketplace_id}/{payments_program_type}",
+    "pathParameters": [
+      "marketplace_id",
+      "payments_program_type"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.account.readonly",
+    "token": "user",
+    "description": "Note: This method is no longer applicable, as all seller accounts globally have been enabled for the new eBay payment and checkout flow. This method returns whether or not the user is opted-in to the specified payments program. Sellers opt-in to payments programs by marketplace and you use the marketplace_id path parameter to specify the marketplace of the status flag you want returned.",
+    "source": "src/types/sell-apps/account-management/sellAccountV1Oas3.ts"
+  },
+  {
+    "id": "account.getPaymentsProgramOnboarding",
+    "family": "account",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/account/v1/payments_program/{marketplace_id}/{payments_program_type}/onboarding",
+    "pathParameters": [
+      "marketplace_id",
+      "payments_program_type"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.account.readonly",
+    "token": "user",
+    "description": "Note: This method is no longer applicable, as all seller accounts globally have been enabled for the new eBay payment and checkout flow. This method retrieves a seller's onboarding status for a payments program for a specified marketplace. The overall onboarding status of the seller and the status of each onboarding step is returned.",
+    "source": "src/types/sell-apps/account-management/sellAccountV1Oas3.ts"
+  },
+  {
+    "id": "account.getPrivileges",
+    "family": "account",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/account/v1/privilege",
+    "pathParameters": [],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.account.readonly",
+    "token": "user",
+    "description": "This method retrieves the seller's current set of privileges, including whether or not the seller's eBay registration has been completed, as well as the details of their site-wide sellingLimit (the amount and quantity they can sell on a given day).",
+    "source": "src/types/sell-apps/account-management/sellAccountV1Oas3.ts"
+  },
+  {
+    "id": "account.getOptedInPrograms",
+    "family": "account",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/account/v1/program/get_opted_in_programs",
+    "pathParameters": [],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.account.readonly",
+    "token": "user",
+    "description": "This method gets a list of the seller programs that the seller has opted-in to.",
+    "source": "src/types/sell-apps/account-management/sellAccountV1Oas3.ts"
+  },
+  {
+    "id": "account.getReturnPolicies",
+    "family": "account",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/account/v1/return_policy",
+    "pathParameters": [],
+    "queryParameters": [
+      "marketplace_id"
+    ],
+    "requiredQuery": [
+      "marketplace_id"
+    ],
+    "scope": "sell.account.readonly",
+    "token": "user",
+    "description": "This method retrieves all the return policies configured for the marketplace you specify using the marketplace_id query parameter.",
+    "source": "src/types/sell-apps/account-management/sellAccountV1Oas3.ts"
+  },
+  {
+    "id": "account.getReturnPolicy",
+    "family": "account",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/account/v1/return_policy/{return_policy_id}",
+    "pathParameters": [
+      "return_policy_id"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.account.readonly",
+    "token": "user",
+    "description": "This method retrieves the complete details of the return policy specified by the returnPolicyId path parameter.",
+    "source": "src/types/sell-apps/account-management/sellAccountV1Oas3.ts"
+  },
+  {
+    "id": "account.getReturnPolicyByName",
+    "family": "account",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/account/v1/return_policy/get_by_policy_name",
+    "pathParameters": [],
+    "queryParameters": [
+      "marketplace_id",
+      "name"
+    ],
+    "requiredQuery": [
+      "marketplace_id",
+      "name"
+    ],
+    "scope": "sell.account.readonly",
+    "token": "user",
+    "description": "This method retrieves the details of a specific return policy. Supply both the policy name and its associated marketplace_id in the request query parameters.",
+    "source": "src/types/sell-apps/account-management/sellAccountV1Oas3.ts"
+  },
+  {
+    "id": "account.getSalesTax",
+    "family": "account",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/account/v1/sales_tax/{countryCode}/{jurisdictionId}",
+    "pathParameters": [
+      "countryCode",
+      "jurisdictionId"
+    ],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.account.readonly",
+    "token": "user",
+    "description": "This call retrieves the current sales-tax table entry for a specific tax jurisdiction. Specify the jurisdiction to retrieve using the countryCode and jurisdictionId path parameters. All four response fields will be returned if a sales-tax entry exists for the tax jurisdiction. Otherwise, the response will be returned as empty. Note: Sales-tax tables are only available for the US (EBAY_US) and Canada (EBAY_CA) marketplaces. Important! In the US, eBay now calculates, collects, and remits sales tax to the proper taxing authorities in all 50 states and Washington, DC. Sellers can no longer specify sales-tax rates for these jurisdictions using a tax table. However, sellers may continue to use a sales-tax table to set rates for the following US territories: American Samoa (AS) Guam (GU) Northern Mariana Islands (MP) Palau (PW) US Virgin Islands (VI) For additional information, refer to Taxes and import charges .",
+    "source": "src/types/sell-apps/account-management/sellAccountV1Oas3.ts"
+  },
+  {
+    "id": "account.getSalesTaxes",
+    "family": "account",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/account/v1/sales_tax",
+    "pathParameters": [],
+    "queryParameters": [
+      "country_code"
+    ],
+    "requiredQuery": [
+      "country_code"
+    ],
+    "scope": "sell.account.readonly",
+    "token": "user",
+    "description": "Use this call to retrieve all sales tax table entries that the seller has defined for a specific country. All four response fields will be returned for each tax jurisdiction that matches the search criteria. If no sales tax rates are defined for the specified, a 204 No Content status code is returned with no response payload. Note: Sales-tax tables are only available for the US (EBAY_US) and Canada (EBAY_CA) marketplaces. Important! In the US, eBay now calculates, collects, and remits sales tax to the proper taxing authorities in all 50 states and Washington, DC. Sellers can no longer specify sales-tax rates for these jurisdictions using a tax table. However, sellers may continue to use a sales-tax table to set rates for the following US territories: American Samoa (AS) Guam (GU) Northern Mariana Islands (MP) Palau (PW) US Virgin Islands (VI) For additional information, refer to Taxes and import charges .",
+    "source": "src/types/sell-apps/account-management/sellAccountV1Oas3.ts"
+  },
+  {
+    "id": "account.getSubscription",
+    "family": "account",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/account/v1/subscription",
+    "pathParameters": [],
+    "queryParameters": [
+      "limit",
+      "continuation_token"
+    ],
+    "requiredQuery": [],
+    "scope": "sell.account.readonly",
+    "token": "user",
+    "description": "This method retrieves a list of subscriptions associated with the seller account.",
+    "source": "src/types/sell-apps/account-management/sellAccountV1Oas3.ts"
+  },
+  {
+    "id": "account.getKYC",
+    "family": "account",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/account/v1/kyc",
+    "pathParameters": [],
+    "queryParameters": [],
+    "requiredQuery": [],
+    "scope": "sell.account.readonly",
+    "token": "user",
+    "description": "Note: This method was originally created to see which onboarding requirements were still pending for sellers being onboarded for eBay managed payments, but now that all seller accounts are onboarded globally, this method should now just return an empty payload with a 204 No Content HTTP status code.",
+    "source": "src/types/sell-apps/account-management/sellAccountV1Oas3.ts"
+  },
+  {
+    "id": "account.getAdvertisingEligibility",
+    "family": "account",
+    "method": "GET",
+    "host": "api",
+    "path": "/sell/account/v1/advertising_eligibility",
+    "pathParameters": [],
+    "queryParameters": [
+      "program_types"
+    ],
+    "requiredQuery": [],
+    "scope": "sell.account.readonly",
+    "token": "user",
+    "description": "This method allows developers to check the seller eligibility status for eBay advertising programs.",
+    "source": "src/types/sell-apps/account-management/sellAccountV1Oas3.ts"
+  },
+  {
+    "id": "developer_analytics.getRateLimits",
+    "family": "developer_analytics",
+    "method": "GET",
+    "host": "api",
+    "path": "/developer/analytics/v1_beta/rate_limit/",
+    "pathParameters": [],
+    "queryParameters": [
+      "api_context",
+      "api_name"
+    ],
+    "requiredQuery": [],
+    "scope": "",
+    "token": "application",
+    "description": "This method retrieves the call limit and utilization data for an application. The data is retrieved for all RESTful APIs and the legacy Trading API. The response from getRateLimits includes a list of the applicable resources and the \"call limit\", or quota, that is set for each resource. In addition to quota information, the response also includes the number of remaining calls available before the limit is reached, the time remaining before the quota resets, the number of calls made to the specific resource, and the length of the \"time window\" to which the quota applies. By default, this method returns utilization data for all RESTful API and the legacy Trading API resources. Use the api_name and api_context query parameters to filter the response to only the desired APIs. For more on call limits, see Application Growth Check .",
+    "source": "src/types/application-settings/developerAnalyticsV1BetaOas3.ts"
+  },
+  {
+    "id": "developer_analytics.getUserRateLimits",
+    "family": "developer_analytics",
+    "method": "GET",
+    "host": "api",
+    "path": "/developer/analytics/v1_beta/user_rate_limit/",
+    "pathParameters": [],
+    "queryParameters": [
+      "api_context",
+      "api_name"
+    ],
+    "requiredQuery": [],
+    "scope": "sell.inventory.readonly",
+    "token": "user",
+    "description": "This method retrieves the call limit and utilization data for an application user. The call-limit data is returned for all RESTful APIs and the legacy Trading API that limit calls on a per-user basis. The response from getUserRateLimits includes a list of the applicable resources and the \"call limit\", or quota, that is set for each resource. In addition to quota information, the response also includes the number of remaining calls available before the limit is reached, the time remaining before the quota resets, the number of calls made to the specific resource, and the length of the \"time window\" to which the quota applies. By default, this method returns utilization data for all RESTful APIs resources and the legacy Trading API calls that limit request access by user. Use the api_name and api_context query parameters to filter the response to only the desired APIs. For more on call limits, see Application Growth Check .",
+    "source": "src/types/application-settings/developerAnalyticsV1BetaOas3.ts"
+  },
+  {
+    "id": "browse.search",
+    "family": "browse",
+    "method": "GET",
+    "host": "api",
+    "path": "/buy/browse/v1/item_summary/search",
+    "pathParameters": [],
+    "queryParameters": [
+      "q",
+      "category_ids",
+      "epid",
+      "gtin",
+      "charity_ids",
+      "fieldgroups",
+      "filter",
+      "sort",
+      "limit",
+      "offset",
+      "aspect_filter"
+    ],
+    "requiredQuery": [],
+    "scope": "",
+    "token": "application",
+    "description": "Read active marketplace listings. Browse API approval and application token may be required. See official operation reference for filters and pagination.",
+    "source": "https://developer.ebay.com/api-docs/buy/browse/overview.html"
+  },
+  {
+    "id": "browse.getItem",
+    "family": "browse",
+    "method": "GET",
+    "host": "api",
+    "path": "/buy/browse/v1/item/{item_id}",
+    "pathParameters": [
+      "item_id"
+    ],
+    "queryParameters": [
+      "fieldgroups",
+      "quantity_for_shipping_estimate"
+    ],
+    "requiredQuery": [],
+    "scope": "",
+    "token": "application",
+    "description": "Read active marketplace listings. Browse API approval and application token may be required. See official operation reference for filters and pagination.",
+    "source": "https://developer.ebay.com/api-docs/buy/browse/overview.html"
+  },
+  {
+    "id": "browse.getItems",
+    "family": "browse",
+    "method": "GET",
+    "host": "api",
+    "path": "/buy/browse/v1/item",
+    "pathParameters": [],
+    "queryParameters": [
+      "item_ids",
+      "fieldgroups"
+    ],
+    "requiredQuery": [],
+    "scope": "",
+    "token": "application",
+    "description": "Read active marketplace listings. Browse API approval and application token may be required. See official operation reference for filters and pagination.",
+    "source": "https://developer.ebay.com/api-docs/buy/browse/overview.html"
+  },
+  {
+    "id": "browse.getItemByLegacyId",
+    "family": "browse",
+    "method": "GET",
+    "host": "api",
+    "path": "/buy/browse/v1/item/get_item_by_legacy_id",
+    "pathParameters": [],
+    "queryParameters": [
+      "legacy_item_id",
+      "legacy_variation_id",
+      "legacy_variation_sku",
+      "fieldgroups"
+    ],
+    "requiredQuery": [],
+    "scope": "",
+    "token": "application",
+    "description": "Read active marketplace listings. Browse API approval and application token may be required. See official operation reference for filters and pagination.",
+    "source": "https://developer.ebay.com/api-docs/buy/browse/overview.html"
+  },
+  {
+    "id": "browse.getItemsByItemGroup",
+    "family": "browse",
+    "method": "GET",
+    "host": "api",
+    "path": "/buy/browse/v1/item/get_items_by_item_group",
+    "pathParameters": [],
+    "queryParameters": [
+      "item_group_id"
+    ],
+    "requiredQuery": [],
+    "scope": "",
+    "token": "application",
+    "description": "Read active marketplace listings. Browse API approval and application token may be required. See official operation reference for filters and pagination.",
+    "source": "https://developer.ebay.com/api-docs/buy/browse/overview.html"
+  }
+]
