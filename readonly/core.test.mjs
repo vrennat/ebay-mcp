@@ -165,7 +165,8 @@ test('Trading operations have fixed XML, headers and no arbitrary call/body', as
   const client = createClient(config, {
     fetchImpl: async (url, options) => {
       calls.push({ url, options });
-      return new Response('<GetItemResponse><Ack>Success</Ack></GetItemResponse>', {
+      const name = options.headers['X-EBAY-API-CALL-NAME'];
+      return new Response(`<${name}Response><Ack>Success</Ack></${name}Response>`, {
         headers: { 'content-type': 'text/xml' },
       });
     },

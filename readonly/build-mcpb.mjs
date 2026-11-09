@@ -95,8 +95,9 @@ async function dependencyGraph(root) {
     }
     return node;
   }
-  // Preserve root resolution for the only two direct external imports.
+  // Preserve root resolution for the supported runtime's direct imports.
   await visit('zod', root);
+  await visit('fast-xml-parser', root);
   await visit('@modelcontextprotocol/sdk', root);
   return { graph, primary };
 }
@@ -236,7 +237,7 @@ export async function buildBundle({ outputPath, root = ROOT } = {}) {
           type: 'module',
           engines: { node: manifest.compatibility.runtimes.node },
           dependencies: Object.fromEntries(
-            ['@modelcontextprotocol/sdk', 'zod'].map((name) => [
+            ['@modelcontextprotocol/sdk', 'zod', 'fast-xml-parser'].map((name) => [
               name,
               primary.get(name).metadata.version,
             ]),

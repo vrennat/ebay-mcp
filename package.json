@@ -1,6 +1,6 @@
 {
   "name": "ac-ebay-readonly",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "A locally enforced, read-only eBay MCP for Al and Amazing Claude.",
   "type": "module",
@@ -36,7 +36,8 @@
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "1.32.1",
-    "zod": "4.6.7"
+    "zod": "4.6.7",
+    "fast-xml-parser": "5.9.0"
   },
   "overrides": {
     "hono": ">=4.13.7",

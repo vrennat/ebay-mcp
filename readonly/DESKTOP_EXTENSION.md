@@ -35,7 +35,7 @@ node readonly/build-mcpb.mjs
 
 The builder requires Node 24+ and the system `zip` command. It performs no installs, downloads, package scripts, or publication. It copies only the read-only source allowlist, license, documentation, and the actual installed production/required-peer dependency closure of the MCP SDK and Zod. Package directory links are resolved; symlinks and special files inside copied packages are refused. Different dependency versions retain the required nested resolution.
 
-The output defaults to `readonly/dist/ac-ebay-readonly-0.1.0.mcpb`. To choose another new output file:
+The output defaults to `readonly/dist/ac-ebay-readonly-0.1.1.mcpb`. To choose another new output file:
 
 ```sh
 node readonly/build-mcpb.mjs /absolute/path/ac-ebay-readonly.mcpb

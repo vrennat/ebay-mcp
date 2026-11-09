@@ -29,7 +29,8 @@ Try: “AC, show my active listings”, “Which orders are still waiting to shi
 - API hosts are fixed to eBay production/sandbox. Redirects, proxies, custom headers and method overrides are not accepted.
 - Unknown operations, path traversal and unsupported query fields fail locally.
 - Automatic authentication requests only an explicit set of least-privilege scopes. It never escalates to a management scope after a failed read.
-- Credentials are not exposed as MCP tools or included in results. Authentication errors and notification verification tokens are redacted.
+- Known configured/refreshed credentials are scrubbed throughout JSON, XML and text responses, including alternate field names. Recognized credential fields are also redacted. Arbitrary unknown secrets in seller content cannot be reliably detected.
+- Trading XML acknowledgements are checked: HTTP 200 with Failure or PartialFailure is an error, not a successful result. Warnings are explicit; malformed or mismatched XML fails closed.
 - Upstream publishing and automatic API-sync workflows are archived. New operations require review, not automatic inclusion.
 
 A GET-only rule is insufficient: eBay's `getRateTables` can assign missing rate-table IDs. It is deliberately excluded. Notification destination reads expose verification tokens and are also excluded.
@@ -92,7 +93,7 @@ This is broad **read coverage**, not “every eBay screen”:
 - No new asynchronous report generation, notification tests, shipping quotes or labels, messages, offers, refunds, purchases, uploads or listing changes.
 - Existing binary reports/documents/labels are not returned. Responses above 8 MiB must be narrowed.
 - No EU/UK Finances digital-signature support. That may prevent finance reads even with a suitable token.
-- Legacy Trading wrappers currently use US site ID 0 and cover active listings and item detail only, not all historical orders, watch lists, bids or Trading message APIs.
+- Legacy Trading wrappers currently use US site ID 0 and cover active listings and item detail only, not all historical orders, watch lists, bids or Trading message APIs. **GetMyeBaySelling has a 25,000-active-item ceiling; pagination cannot prove completeness above that ceiling.**
 - Inventory reads alone do not include every website-created listing. The dedicated Trading tools fill part of that gap without migrating listings.
 - Some read-only POST computations, such as compatibility searches and fee previews, are not yet implemented.
 - No live-account, production OAuth, Claude Desktop installation, macOS/Windows, or full cross-marketplace verification has been performed.
@@ -103,7 +104,7 @@ This is broad **read coverage**, not “every eBay screen”:
 npm run verify
 ```
 
-Tests exercise every catalogue route with mocked transport, blocked write paths, independent wire checks, token routing/redaction, scope downscoping, response limits, local configuration permissions, and an in-memory real MCP client/server exchange. They do not make live eBay calls.
+Tests exercise every catalogue route with mocked transport, blocked write paths, independent wire checks, token routing/redaction (including echoed values and XML/text), scope downscoping, Trading error acknowledgements, response limits, local configuration permissions, and an in-memory real MCP client/server exchange. They do not make live eBay calls.
 
 Only `readonly/` is the supported runtime and is included in the package allowlist. Original `src/`, `tests/`, generated schemas and archived upstream documentation remain for provenance and comparison; they are **not loaded or built by this fork**. `UPSTREAM_README.md` is historical and its setup instructions must not be used. `UPSTREAM_PACKAGE.json` and the old pnpm lockfile describe the predecessor, not this package.
 

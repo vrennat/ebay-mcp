@@ -10,7 +10,9 @@ The supported server is `readonly/index.mjs`. Its seven tools have no account-mu
 4. Fixed HTTPS eBay API origins, no redirects or proxy/base-URL setting.
 5. Exactly three business-read POST shapes: Inventory bulk_get_inventory_item, Trading GetItem, Trading GetMyeBaySelling. Fixed XML call names and payload construction. OAuth POSTs are internal token lifecycle operations, not business actions or MCP tools.
 6. Explicit scope allowlist on refresh/client-credential requests, and validation of scope strings returned by eBay when present. No retries with wider privileges.
-7. 30-second deadlines, 8 MiB response cap, no automatic report downloads, no remote MCP listener.
+7. Trading responses require well-formed XML, a matching response root and a single Success/Warning acknowledgement. Failure, PartialFailure, missing/duplicate acknowledgements and malformed XML are errors even with HTTP 200. DTD/entity declarations are rejected.
+8. Known configured and refreshed secret values are scrubbed throughout JSON/XML/text and sanitized error paths, independently of field names. Recognized credential fields are also redacted; unknown arbitrary secrets in seller content cannot be reliably identified.
+9. 30-second deadlines, 8 MiB response cap, no automatic report downloads, no remote MCP listener.
 
 ## Residual risk and honest limits
 
@@ -20,6 +22,7 @@ The supported server is `readonly/index.mjs`. Its seven tools have no account-mu
 - Returned business data is sent to the selected MCP client/model when a tool is used. Listings/messages can contain prompt injection. The server labels results as untrusted data; that is not a guarantee of model behavior.
 - Account data can include customer contact information and financial business information. Share results only when intended and consistent with eBay data handling requirements.
 - Local JSON credentials are plaintext in a private file. Prefer Claude Desktop Extension sensitive settings where supported. A compromised user account/computer remains able to access credentials.
+- GetMyeBaySelling cannot retrieve more than 25,000 active items; pagination must not be described as complete for larger accounts.
 - Binary payloads are not yet supported, signature-required finance reads may fail, and not every eBay read endpoint is implemented. No live-account validation has been performed.
 
 ## Review before distribution
