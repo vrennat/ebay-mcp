@@ -265,7 +265,12 @@ async function replaceJson(
 }
 
 export async function writeTokenConfig(configPath, config) {
-  return replaceJson(configPath, buildTokenConfig(config), { privateDirectory: true });
+  return writeSecureConfig(configPath, buildTokenConfig(config));
+}
+
+/** The caller must validate this config and obtain explicit consent before saving secrets. */
+export async function writeSecureConfig(configPath, config) {
+  return replaceJson(configPath, config, { privateDirectory: true });
 }
 
 export async function prepareClaudeConfig(claudeConfigPath, entry) {

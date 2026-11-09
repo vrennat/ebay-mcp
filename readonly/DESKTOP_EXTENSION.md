@@ -33,9 +33,9 @@ node --test readonly/*.test.mjs
 node readonly/build-mcpb.mjs
 ```
 
-The builder requires Node 24+ and the system `zip` command. It performs no installs, downloads, package scripts, or publication. It copies only the read-only source allowlist, license, documentation, and the actual installed production/required-peer dependency closure of the MCP SDK and Zod. Package directory links are resolved; symlinks and special files inside copied packages are refused. Different dependency versions retain the required nested resolution.
+The builder requires Node 24+ and the system `zip` command. It performs no installs, downloads, package scripts, or publication. It copies only the read-only source allowlist, license, documentation, and the actual installed production/required-peer dependency closure of the MCP SDK, Zod and XML parser. Package directory links are resolved; symlinks and special files inside copied packages are refused. Different dependency versions retain the required nested resolution.
 
-The output defaults to `readonly/dist/ac-ebay-readonly-0.1.1.mcpb`. To choose another new output file:
+The output defaults to `readonly/dist/ac-ebay-readonly-0.2.0.mcpb`. To choose another new output file:
 
 ```sh
 node readonly/build-mcpb.mjs /absolute/path/ac-ebay-readonly.mcpb
@@ -44,6 +44,10 @@ node readonly/build-mcpb.mjs /absolute/path/ac-ebay-readonly.mcpb
 Existing output files are never overwritten. The build refuses more than 64 MiB of copied input or 15,000 files. A successful archive build and stdio smoke test do not prove a Claude Desktop installation or live eBay login works; verify those on the intended computer. No automatic update source is configured.
 
 The manifest was checked against the official MCPB v0.3 schema when added. Revalidate changes using the official tooling before distribution. Do not run a general `mcpb pack` from this repository root: it may include the original server and unrelated files instead of the restricted bundle.
+
+## Browser sign-in alternative
+
+For an existing developer app with an OAuth RuName, the separate [Connect eBay helper](OAUTH_SETUP.md) opens consent in your browser and saves refresh access after explicit confirmation. It can configure Claude as a normal local MCP server. That flow uses a private plaintext credential file and is not integrated into these extension settings. Choose one installation path; disable the token-only extension if switching to the refresh-enabled local server.
 
 ## Terminal fallback
 

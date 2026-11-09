@@ -1,6 +1,6 @@
 {
   "name": "ac-ebay-readonly",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "private": true,
   "description": "A locally enforced, read-only eBay MCP for Al and Amazing Claude.",
   "type": "module",
@@ -12,16 +12,21 @@
     "start": "node readonly/index.mjs",
     "setup": "node readonly/setup.mjs",
     "test": "node --test readonly/*.test.mjs",
-    "check": "node --check readonly/core.mjs && node --check readonly/index.mjs && node --check readonly/setup.mjs && npm test",
+    "check": "node --check readonly/core.mjs && node --check readonly/index.mjs && node --check readonly/setup.mjs && node --check readonly/connect.mjs && node --check readonly/oauth-connect.mjs && npm test",
     "build": "npm run check",
     "verify": "npm run check",
-    "pack:desktop": "node readonly/build-mcpb.mjs"
+    "pack:desktop": "node readonly/build-mcpb.mjs",
+    "connect": "node readonly/connect.mjs"
   },
   "files": [
     "readonly/core.mjs",
     "readonly/catalog.json",
     "readonly/index.mjs",
     "readonly/setup.mjs",
+    "readonly/connect.mjs",
+    "readonly/oauth-connect.mjs",
+    "readonly/OAUTH_SETUP.md",
+    "readonly/DESKTOP_EXTENSION.md",
     "README.md",
     "SECURITY.md",
     "LICENSE"

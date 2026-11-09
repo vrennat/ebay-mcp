@@ -3,7 +3,7 @@
   "manifest_version": "0.3",
   "name": "ac-ebay-readonly",
   "display_name": "AC eBay Read-Only",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Read your eBay listings and account data through an explicitly restricted, local MCP server.",
   "long_description": "Unofficial local read-only eBay connector. Requires your existing eBay developer application and OAuth access token. No listing edits, purchases, messages, or account changes are exposed. Token scopes and eBay API access still limit coverage. Tokens expire; replace them in extension settings. This extension does not create credentials or automatically refresh tokens.",
   "author": {

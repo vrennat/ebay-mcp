@@ -37,13 +37,11 @@ A GET-only rule is insufficient: eBay's `getRateTables` can assign missing rate-
 
 **Read-only software is not a universally read-only token.** eBay uses mixed read/write permissions for several read APIs. The base `api_scope` is also not a global read-only guarantee. If someone steals a broad token, they could use it outside this program. Never paste tokens into Claude, chat, GitHub, or screenshots. Read [SECURITY.md](SECURITY.md).
 
-## Easiest Claude Desktop setup
+## Connect eBay to Claude Desktop
 
-A local Desktop Extension manifest and packaging helper are included. See [the extension guide](readonly/DESKTOP_EXTENSION.md) for creating the `.mcpb` file and installing it by clicking it. Claude stores fields marked sensitive through its extension settings.
+**Browser sign-in with automatic refresh:** use the separate local `npm run connect` helper. It opens eBay consent, then accepts the complete success-page URL in a hidden terminal prompt. It checks the session and exchanges the one-time code, asks before saving credentials, and can add the restricted server to Claude Desktop.
 
-This first version uses **existing access tokens**. It is not a “sign in with eBay” product yet. A helper still needs an eBay Developer account/application and appropriate production tokens. Tokens expire, so this token-only path will need reconnection. Do not use the upstream `npx ebay-mcp` command; that is a different, write-capable server.
-
-### Developer/terminal fallback
+**There is still a developer-app prerequisite.** An activated user-owned eBay developer application, Client ID, Client Secret and OAuth RuName must already exist. This is not one-click setup for an ordinary eBay account. Start with the [OAuth setup guide](readonly/OAUTH_SETUP.md), including production activation and data-deletion compliance. No shared app secret is bundled. The helper does not create developer accounts or application keysets; it obtains OAuth tokens only after explicit consent.
 
 Install Node.js 24 or later, then:
 
@@ -51,17 +49,15 @@ Install Node.js 24 or later, then:
 git clone https://github.com/vrennat/ebay-mcp.git
 cd ebay-mcp
 npm ci --ignore-scripts
-npm test
-npm run setup
+npm run verify
+npm run connect
 ```
 
-The wizard:
-1. Asks for the existing **user access token** in a hidden local prompt, plus an optional **application access token** for public Browse/metadata reads.
-2. Asks before writing `~/.config/ac-ebay/config.json` with private file permissions. This file is plaintext, not an encrypted vault. Windows file permissions depend on the user profile's ACL.
-3. Separately asks before adding this fork to Claude Desktop. It preserves other servers/settings and saves a private backup of the old Claude config.
-4. Uses an absolute Node executable and this fork's absolute `readonly/index.mjs`, so it cannot accidentally launch upstream from npm.
+The wizard shows the requested scopes and separately asks before opening consent, exchanging the code for persistent access, saving credentials, and changing Claude configuration. Passwords stay on eBay. Secrets and the callback URL are entered only in hidden local prompts, never chat or command-line arguments. The helper stores a private plaintext file (0600, directory 0700), not an encrypted vault. On Windows, also restrict the folder ACL to the account holder.
 
-Restart Claude Desktop after setup. Setup does not run during installation, never creates an eBay credential, and never changes eBay permissions.
+Restart Claude Desktop after setup and make a minimal authenticated read. Setup completion is not proof that the account is eligible for every route. The runtime refreshes access in memory; a revoked or expired grant requires reconnecting. Claude's config contains only an absolute Node path, this fork's absolute entry point and the private config path, never secrets. Existing settings are preserved and backed up.
+
+**Click-to-install, existing-token alternative:** the [Desktop Extension guide](readonly/DESKTOP_EXTENSION.md) explains the `.mcpb` bundle. It uses sensitive token fields in Claude settings but does not perform browser sign-in or refresh tokens. An existing-token terminal wizard is also available as `npm run setup`. Choose one path to avoid duplicate connectors. Do not use the upstream `npx ebay-mcp` command; it launches a different, write-capable server.
 
 ## OAuth and scope coverage
 
@@ -81,7 +77,7 @@ Optional `commerce.feedback.readonly` belongs to an **application token**, not t
 
 Some read operations require mixed scopes, including general finances, disputes, messages, stores, media and logistics. Several marketing suggestions and payout settings do too. They may work with an independently authorized existing token, but this program will never request those scopes automatically. The discovery tool identifies mixed-scope operations. Pasted opaque tokens cannot be scope-verified.
 
-Advanced manually configured clients may supply existing `clientId`, `clientSecret`, `refreshToken`, and an explicit `scopes` array in the private JSON config. The runtime refreshes in memory using exactly that read-scope subset. A readonly scope is not necessarily a subset of an older management-scope grant: fresh user consent may be needed. No OAuth login wizard or token persistence/rotation is implemented yet. Do not enter app secrets into Claude.
+The Connect helper requests base + the seven standard user read scopes above by default. You can select a smaller app-supported subset. Advanced users can add the specifically allowed `sell.finances.earnings.read` if eligible; other mixed management scopes are rejected. Runtime refresh uses exactly the configured read subset. A readonly scope is not necessarily a subset of an older management-scope grant, so fresh consent may be needed. Public application-token requests are separate and only happen when those reads are used. No Buy API eligibility is assumed. Do not enter app secrets into Claude.
 
 [eBay authorization guide](https://developer.ebay.com/develop/guides/sell/authorization) · [Current eBay API specifications](https://developer.ebay.com/develop/apis) · [Claude local MCP setup](https://support.claude.com/en/articles/10949351-getting-started-with-local-mcp-servers-on-claude-desktop)
 
@@ -108,6 +104,6 @@ Tests exercise every catalogue route with mocked transport, blocked write paths,
 
 Only `readonly/` is the supported runtime and is included in the package allowlist. Original `src/`, `tests/`, generated schemas and archived upstream documentation remain for provenance and comparison; they are **not loaded or built by this fork**. `UPSTREAM_README.md` is historical and its setup instructions must not be used. `UPSTREAM_PACKAGE.json` and the old pnpm lockfile describe the predecessor, not this package.
 
-The next usability milestone is a reviewed OAuth connection flow so Al can approve access on eBay and avoid copying short-lived tokens. That requires a properly registered application/RuName and a decision about mixed-scope reads; it is not hidden inside this prototype.
+The browser connection flow is tested with mocked eBay responses, not a live account. A fully hosted one-click product would need a reviewed confidential backend, secure credential storage and eBay compliance; embedding a shared client secret in a public desktop bundle is not safe.
 
 MIT license; original attribution retained in [LICENSE](LICENSE).

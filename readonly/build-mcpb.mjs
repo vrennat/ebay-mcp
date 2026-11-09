@@ -214,6 +214,9 @@ export async function buildBundle({ outputPath, root = ROOT } = {}) {
       'core.mjs',
       'catalog.json',
       'setup.mjs',
+      'connect.mjs',
+      'oauth-connect.mjs',
+      'OAUTH_SETUP.md',
       'DESKTOP_EXTENSION.md',
     ]) {
       await copyFile(path.join(source, name), path.join(stage, name));

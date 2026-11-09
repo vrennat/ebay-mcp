@@ -351,3 +351,60 @@ test('reviewed exceptions use verified current API hosts and versions', () => {
   assert.equal(operationInfo('developer_analytics.getUserRateLimits').token, 'user');
   assert.match(operationInfo('account_v2.getPayoutSettings').scopeSafety, /mixed scope/);
 });
+
+test('saved refresh expiry is exposed without credentials and stops expired refresh before network', async () => {
+  let calls = 0;
+  const client = createClient(
+    {
+      environment: 'sandbox',
+      clientId: 'mock-app',
+      clientSecret: 'mock-secret',
+      refreshToken: 'mock-refresh',
+      refreshTokenExpiresAt: '2000-01-01T00:00:00.000Z',
+    },
+    {
+      fetchImpl: async () => {
+        calls++;
+        return response();
+      },
+    },
+  );
+  assert.equal(client.status().refreshTokenExpired, true);
+  await assert.rejects(() => client.read('inventory.getInventoryItems'), /expired.*connect/);
+  assert.equal(calls, 0);
+  for (const refreshTokenExpiresAt of [0, 'not-a-date', '2026-01-01T00:00:00Z'])
+    assert.throws(() => validateConfig({ ...config, refreshTokenExpiresAt }), /expiry/);
+});
+test('refresh response N/A does not replace original refresh token or its expiry', async () => {
+  const calls = [];
+  let tokenCount = 0;
+  const client = createClient(
+    {
+      environment: 'sandbox',
+      clientId: 'mock-app',
+      clientSecret: 'mock-secret',
+      refreshToken: 'mock-original',
+      refreshTokenExpiresAt: '2099-01-01T00:00:00.000Z',
+      scopes: [READ_SCOPES[1]],
+    },
+    {
+      fetchImpl: async (url, options) => {
+        calls.push({ url, options });
+        return url.endsWith('/token')
+          ? response({
+              access_token: `mock-access-${++tokenCount}`,
+              expires_in: 1,
+              refresh_token: 'N/A',
+            })
+          : response();
+      },
+    },
+  );
+  await client.read('inventory.getInventoryItems');
+  await client.read('inventory.getInventoryItems');
+  const refreshes = calls.filter((call) => call.url.endsWith('/token'));
+  assert.equal(refreshes.length, 2);
+  for (const call of refreshes)
+    assert.equal(new URLSearchParams(call.options.body).get('refresh_token'), 'mock-original');
+  assert.equal(client.status().refreshTokenExpiresAt, '2099-01-01T00:00:00.000Z');
+});

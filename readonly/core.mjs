@@ -164,6 +164,7 @@ export function validateConfig(input) {
       'clientId',
       'clientSecret',
       'refreshToken',
+      'refreshTokenExpiresAt',
       'scopes',
     ],
     'configuration',
@@ -186,6 +187,13 @@ export function validateConfig(input) {
     )
       throw new Error(`Invalid ${field}; do not paste credentials into Claude.`);
   }
+  if (
+    input.refreshTokenExpiresAt !== undefined &&
+    (typeof input.refreshTokenExpiresAt !== 'string' ||
+      !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/.test(input.refreshTokenExpiresAt) ||
+      !Number.isFinite(Date.parse(input.refreshTokenExpiresAt)))
+  )
+    throw new Error('Invalid refresh-token expiry. Run local connect again.');
   const marketplaceId = input.marketplaceId ?? 'EBAY_US';
   const contentLanguage = input.contentLanguage ?? 'en-US';
   if (!/^EBAY_[A-Z]{2,5}$/.test(marketplaceId) || !/^[a-z]{2}-[A-Z]{2}$/.test(contentLanguage))
@@ -485,6 +493,8 @@ export function createClient(input, { fetchImpl = globalThis.fetch } = {}) {
     }
     if (userToken && (!userExpiry || userExpiry > Date.now())) return userToken;
     if (config.refreshToken) {
+      if (config.refreshTokenExpiresAt && Date.now() >= Date.parse(config.refreshTokenExpiresAt))
+        throw new Error('The saved eBay refresh token has expired. Run local connect again.');
       refreshing ??= oauth(
         { grant_type: 'refresh_token', refresh_token: config.refreshToken },
         config.scopes,
@@ -600,6 +610,12 @@ export function createClient(input, { fetchImpl = globalThis.fetch } = {}) {
       hasUserToken: Boolean(userToken || config.refreshToken),
       hasApplicationToken: Boolean(appToken || config.clientId),
       automaticRefresh: Boolean(config.refreshToken),
+      ...(config.refreshTokenExpiresAt
+        ? {
+            refreshTokenExpiresAt: config.refreshTokenExpiresAt,
+            refreshTokenExpired: Date.now() >= Date.parse(config.refreshTokenExpiresAt),
+          }
+        : {}),
       getOperations: CATALOG.length,
       limitations: [
         'No guarantee of access to every eBay screen or API.',

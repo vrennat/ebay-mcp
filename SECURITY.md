@@ -9,10 +9,16 @@ The supported server is `readonly/index.mjs`. Its seven tools have no account-mu
 3. Independently reconstructed canonical request at the network boundary. Unknown destinations, altered bodies, token-routing changes, encoded traversal and write verbs fail closed.
 4. Fixed HTTPS eBay API origins, no redirects or proxy/base-URL setting.
 5. Exactly three business-read POST shapes: Inventory bulk_get_inventory_item, Trading GetItem, Trading GetMyeBaySelling. Fixed XML call names and payload construction. OAuth POSTs are internal token lifecycle operations, not business actions or MCP tools.
-6. Explicit scope allowlist on refresh/client-credential requests, and validation of scope strings returned by eBay when present. No retries with wider privileges.
+6. Explicit scope allowlist on browser authorization, refresh and client-credential requests, and validation of scope strings returned by eBay when present. No retries with wider privileges.
 7. Trading responses require well-formed XML, a matching response root and a single Success/Warning acknowledgement. Failure, PartialFailure, missing/duplicate acknowledgements and malformed XML are errors even with HTTP 200. DTD/entity declarations are rejected.
 8. Known configured and refreshed secret values are scrubbed throughout JSON/XML/text and sanitized error paths, independently of field names. Recognized credential fields are also redacted; unknown arbitrary secrets in seller content cannot be reliably identified.
 9. 30-second deadlines, 8 MiB response cap, no automatic report downloads, no remote MCP listener.
+
+## Separate browser connection helper
+
+`readonly/connect.mjs` is an explicitly invoked local CLI, never an MCP tool. It uses the account owner's existing app credentials; there is no shared secret or hosted backend. Consent is opened only on the fixed eBay authorization host. A 256-bit state, exact HTTPS callback origin/path/query checks, duplicate-field rejection and one-time exchange protect the copied callback. Authenticated denial consumes the session. Cancellation aborts in-flight exchange and discards late responses. The token exchange uses only the fixed eBay token endpoint with redirects disabled, a 30-second deadline and a 64 KiB response cap. Remote errors and credential values are never printed.
+
+Opening consent, exchanging the code for persistent access, saving plaintext credentials, and changing Claude configuration are separate explicit choices. File permissions and path checks reduce accidental disclosure but do not provide encryption or replace Windows ACLs. A cancelled or unsaved local flow does not revoke an already approved eBay grant. See [OAuth setup](readonly/OAUTH_SETUP.md) for prerequisites, data-deletion compliance and revocation guidance. No live grant was created while developing or testing this flow.
 
 ## Residual risk and honest limits
 
